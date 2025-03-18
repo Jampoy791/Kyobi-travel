@@ -1,4 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
+// Global Colors
+:root{
+    --navy-blue:#0c244c; 
+    --champagne-gold:#dbd3b7;
+    --tropical-green:#00abab;
+    --dark-green:#124747; 
+    --white:#fff;
+
+   --main-font:"League Spartan", sans-serif; 
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+
+}
+
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
+
+
+
+
