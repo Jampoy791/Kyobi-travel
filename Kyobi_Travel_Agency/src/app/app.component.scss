@@ -1,0 +1,83 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.header-title{
+  font-family: var(--main-font);  
+}
+
+.mat-toolbar{
+  height: 100px;
+  padding-left: 50px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: var(--navy-blue);
+  color: var(--white);
+
+  // Tool-bar responsive???
+@media screen and (max-width: 450px) {
+  .mat-toolbar {
+    padding: 0 8px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  .spacer {
+    display: none;  /* Remove the spacer on small screens */
+  }
+}
+  
+}  
+
+.nav-bar-buttons{
+  font-family: var(--main-font);
+  display: flex;
+  font-size: 18px;
+  padding: 1em 2em;
+}
+.nav-bar-buttons.mat-primary{
+  color: white;
+}
+.nav-bar-buttons:hover{
+  color: var(--white);
+}
+.nav-bar-buttons:focus{
+  color: var(--champagne-gold);
+}
+
+
+
+
+// Sidenav Implementation here
+
+.example-container {
+  height: 100%;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+.mat-sidenav-content{
+  padding-top: 64px;
+}
+
+@media (max-width: 450px) {
+  .mat-toolbar button {
+    display: block;
+    font-size: 14px;
+    font-family: var(--main-font);
+  }
+  mat-sidenav {
+    width: 200px;
+  }
+  .example-spacer{
+    display: none;
+  }
+  .mat-toolbar .example-spacer{
+    display: none;
+  }
+}
+
