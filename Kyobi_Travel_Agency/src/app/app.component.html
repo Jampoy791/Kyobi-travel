@@ -1,2 +1,31 @@
-<app-nav-bar></app-nav-bar>
-<app-home-banner></app-home-banner>
+<mat-toolbar>
+    <span class="header-title">Kyobi Travel</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button mat-button class="nav-bar-buttons" color="primary">Home</button>
+      <button mat-button class="nav-bar-buttons" color="primary">About</button>
+      <button mat-button class="nav-bar-buttons" color="primary">Contact Us</button>
+      <button mat-button class="nav-bar-buttons" color="primary">Services</button>
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" opened="false">
+      <mat-nav-list>
+        <a mat-list-item href="#">Home</a>
+        <a mat-list-item href="#">About</a>
+        <a mat-list-item href="#">Contact</a>
+        <a mat-list-item href="#">Services</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <app-home-banner></app-home-banner>
+        <app-introduction></app-introduction>
+    </mat-sidenav-content>
+  </mat-sidenav-container>  
+
+
+
+<router-outlet></router-outlet>
