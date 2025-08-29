@@ -9,13 +9,24 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [HomeBannerComponent, IntroductionComponent, RouterOutlet,
-   MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatMenuModule,MatSidenavModule],
+  imports: [HomeBannerComponent, 
+    IntroductionComponent, 
+    RouterOutlet,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatExpansionModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

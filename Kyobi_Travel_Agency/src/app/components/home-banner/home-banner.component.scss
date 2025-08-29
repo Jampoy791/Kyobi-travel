@@ -1,5 +1,5 @@
 .header-title{
-    height: 600px;
+    height:600px;
     background-image: url('https://images.unsplash.com/photo-1531761535209-180857e963b9?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-repeat: no-repeat;
@@ -39,19 +39,46 @@
 
 }
 @media (max-width: 768px) {
-    .header-title {
-      height: 300px;  /* Reduce height on smaller screens */
-    }
-  
-    .Headline {
-      font-size: 28px;  /* Adjust font size for smaller screens */
-    }
-
-    .hero-title{
-        font-size: 28px;
-    }
-  
-    .nav-bar-buttons {
-      font-size: 14px;  /* Make the button smaller on smaller screens */
-    }
+  .header-title {
+    height: 250px; /* Reduce height further for mobile */
+    margin-top: 100px; /* Prevent header overlap */
+    padding: 0 10px;
   }
+  .Headline {
+    font-size: 20px;
+    padding: 0 5px;
+  }
+  .hero-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .nav-bar-buttons {
+    font-size: 12px;
+    height: 40px;
+    width: 90px;
+    border-radius: 12px;
+    padding: 0.5em 1em;
+  }
+}
+@media (max-width: 480px) {
+  .header-title {
+    height: 180px;
+    margin-top: 100px;
+    padding: 0 5px;
+  }
+  .Headline {
+    font-size: 16px;
+    padding: 0 2px;
+  }
+  .hero-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .nav-bar-buttons {
+    font-size: 10px;
+    height: 32px;
+    width: 70px;
+    border-radius: 8px;
+    padding: 0.3em 0.7em;
+  }
+}
