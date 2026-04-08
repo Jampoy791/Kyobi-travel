@@ -1,0 +1,120 @@
+<!-- ===== BUDGET PLANNER PAGE ===== -->
+<div id="page-budget" class="page">
+  <section style="padding:60px 40px 40px;background:var(--off-white);border-bottom:var(--border)">
+    <div class="container">
+      <span class="section-tag">Plan Your Spend</span>
+      <h1 class="section-title">BUDGET<br>PLANNER</h1>
+    </div>
+  </section>
+  <section class="budget-section" style="padding:60px 40px">
+    <div class="budget-inner">
+      <div class="budget-form-side">
+        <div class="budget-total-input">
+          <label>Total Travel Budget (USD)</label>
+          <input type="number" id="totalBudget" value="5000" oninput="updateBudget()">
+        </div>
+        <div class="budget-sliders">
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>✈ Flights</label>
+              <span class="slider-val" id="val-flights">$1,500</span>
+            </div>
+            <input type="range" id="sl-flights" min="0" max="5000" value="1500" oninput="updateSlider('flights')">
+          </div>
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>🏨 Hotels</label>
+              <span class="slider-val" id="val-hotels">$1,200</span>
+            </div>
+            <input type="range" id="sl-hotels" min="0" max="5000" value="1200" oninput="updateSlider('hotels')">
+          </div>
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>🍽 Food</label>
+              <span class="slider-val" id="val-food">$800</span>
+            </div>
+            <input type="range" id="sl-food" min="0" max="5000" value="800" oninput="updateSlider('food')">
+          </div>
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>🎡 Activities</label>
+              <span class="slider-val" id="val-activities">$600</span>
+            </div>
+            <input type="range" id="sl-activities" min="0" max="5000" value="600" oninput="updateSlider('activities')">
+          </div>
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>🛍 Shopping</label>
+              <span class="slider-val" id="val-shopping">$300</span>
+            </div>
+            <input type="range" id="sl-shopping" min="0" max="5000" value="300" oninput="updateSlider('shopping')">
+          </div>
+        </div>
+      </div>
+      <div class="budget-vis-side">
+        <div class="budget-donut-wrap">
+          <div class="budget-donut">
+            <svg id="budgetSVG" viewBox="0 0 100 100" width="260" height="260">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#1e2d4a" stroke-width="18"/>
+              <circle id="ring-flights" cx="50" cy="50" r="40" fill="none" stroke="#1E5CFF" stroke-width="18" stroke-dasharray="0 251.2" stroke-linecap="butt"/>
+              <circle id="ring-hotels" cx="50" cy="50" r="40" fill="none" stroke="#FFD600" stroke-width="18" stroke-dasharray="0 251.2" stroke-linecap="butt"/>
+              <circle id="ring-food" cx="50" cy="50" r="40" fill="none" stroke="#FF6B35" stroke-width="18" stroke-dasharray="0 251.2" stroke-linecap="butt"/>
+              <circle id="ring-activities" cx="50" cy="50" r="40" fill="none" stroke="#00C896" stroke-width="18" stroke-dasharray="0 251.2" stroke-linecap="butt"/>
+              <circle id="ring-shopping" cx="50" cy="50" r="40" fill="none" stroke="#C456F0" stroke-width="18" stroke-dasharray="0 251.2" stroke-linecap="butt"/>
+            </svg>
+            <div class="donut-center">
+              <span class="donut-remaining" id="donutRemaining">$600</span>
+              <span class="donut-label">Remaining</span>
+            </div>
+          </div>
+          <div class="budget-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#1E5CFF"></div>
+              <div class="legend-info">
+                <span class="legend-cat">Flights</span>
+                <span class="legend-amount" id="leg-flights">$1,500</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#FFD600"></div>
+              <div class="legend-info">
+                <span class="legend-cat">Hotels</span>
+                <span class="legend-amount" id="leg-hotels">$1,200</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#FF6B35"></div>
+              <div class="legend-info">
+                <span class="legend-cat">Food</span>
+                <span class="legend-amount" id="leg-food">$800</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#00C896"></div>
+              <div class="legend-info">
+                <span class="legend-cat">Activities</span>
+                <span class="legend-amount" id="leg-activities">$600</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#C456F0"></div>
+              <div class="legend-info">
+                <span class="legend-cat">Shopping</span>
+                <span class="legend-amount" id="leg-shopping">$300</span>
+              </div>
+            </div>
+            <div class="legend-item" style="background:rgba(255,255,0,0.08);border:1px solid rgba(255,214,0,0.3)">
+              <div class="legend-dot" style="background:#fff;border:2px solid rgba(255,255,255,0.3)"></div>
+              <div class="legend-info">
+                <span class="legend-cat">Remaining</span>
+                <span class="legend-amount" id="leg-remaining" style="color:var(--yellow)">$600</span>
+              </div>
+            </div>
+          </div>
+          <div id="budgetWarning" style="color:#FF6B35;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;display:none">⚠ Over Budget!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- /budget page -->

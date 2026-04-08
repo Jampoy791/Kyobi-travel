@@ -1,0 +1,64 @@
+/* ===== MODAL / LOGIN ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border: var(--border);
+    box-shadow: 12px 12px 0px var(--yellow);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+  }
+
+  body.dark .modal { background: #1A1A1A; }
+
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--blue);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  body.dark .modal-close { color: #ccc; }
+
+  .modal h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    margin-bottom: 24px;
+    color: var(--blue);
+  }
+
+  body.dark .modal h2 { color: var(--yellow); }
+
+  .modal .form-group { margin-bottom: 16px; }
+
+  .modal-toggle {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--gray);
+  }
+
+  .modal-toggle a {
+    color: var(--blue-bright);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+  }

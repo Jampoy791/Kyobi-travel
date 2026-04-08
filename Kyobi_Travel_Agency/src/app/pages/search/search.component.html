@@ -1,0 +1,75 @@
+<!-- ===== SEARCH RESULTS PAGE ===== -->
+<div id="page-search" class="page">
+  <section style="padding:40px 40px 20px;border-bottom:var(--border);background:var(--off-white)">
+    <div class="container">
+      <span class="section-tag">Showing results for</span>
+      <h1 class="section-title" id="searchHeading">ALL DESTINATIONS</h1>
+    </div>
+  </section>
+  <section style="padding:40px">
+    <div class="results-layout">
+        
+      <!-- Filters -->
+      <aside class="filters-panel">
+        <div class="filter-title">Filters</div>
+ 
+        <div class="filter-section">
+          <label class="filter-label">Price Range</label>
+          <div class="price-inputs">
+            <input type="number" id="priceMin" value="500" placeholder="Min">
+            <span>—</span>
+            <input type="number" id="priceMax" value="5000" placeholder="Max">
+          </div>
+        </div>
+ 
+        <div class="filter-section">
+          <label class="filter-label">Star Rating</label>
+          <div class="star-filter">
+            <button class="star-btn" onclick="toggleStar(this)">★ 5</button>
+            <button class="star-btn active" onclick="toggleStar(this)">★ 4+</button>
+            <button class="star-btn" onclick="toggleStar(this)">★ 3+</button>
+            <button class="star-btn" onclick="toggleStar(this)">Any</button>
+          </div>
+        </div>
+ 
+        <div class="filter-section">
+          <label class="filter-label">Destination Type</label>
+          <label class="amenity-check"><input type="checkbox" checked> Beach</label>
+          <label class="amenity-check"><input type="checkbox" checked> City</label>
+          <label class="amenity-check"><input type="checkbox"> Mountain</label>
+          <label class="amenity-check"><input type="checkbox"> Countryside</label>
+          <label class="amenity-check"><input type="checkbox"> Cultural</label>
+        </div>
+ 
+        <div class="filter-section">
+          <label class="filter-label">Amenities</label>
+          <label class="amenity-check"><input type="checkbox" checked> Pool</label>
+          <label class="amenity-check"><input type="checkbox" checked> WiFi</label>
+          <label class="amenity-check"><input type="checkbox"> Spa</label>
+          <label class="amenity-check"><input type="checkbox"> Gym</label>
+          <label class="amenity-check"><input type="checkbox"> Pet-Friendly</label>
+        </div>
+ 
+        <button class="btn btn-primary" style="width:100%" onclick="showToast('Filters applied!')">Apply Filters</button>
+      </aside>
+ 
+      <!-- Results -->
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <span style="font-weight:700;font-size:14px">6 Results Found</span>
+          <select style="padding:8px 12px;border:2px solid #ddd;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;background:var(--white);color:var(--blue)">
+            <option>Sort: Best Match</option>
+            <option>Sort: Price Low–High</option>
+            <option>Sort: Price High–Low</option>
+            <option>Sort: Rating</option>
+          </select>
+        </div>
+ 
+        <!-- Result Cards -->
+        <div id="resultsList"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- /search page -->

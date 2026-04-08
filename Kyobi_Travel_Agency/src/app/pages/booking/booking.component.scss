@@ -1,0 +1,103 @@
+ /* ===== BOOKING PAGE ===== */
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .booking-form-card {
+    border: var(--border);
+    background: var(--white);
+    box-shadow: var(--shadow);
+    padding: 36px;
+  }
+
+  body.dark .booking-form-card { background: #1A1A1A; }
+
+  .form-section-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 20px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--off-white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  body.dark .form-section-title { border-color: #333; }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    background: var(--blue);
+    color: var(--yellow);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  body.dark .step-num { background: var(--yellow); color: #0D0D0D; }
+
+  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .order-summary {
+    border: var(--border);
+    background: var(--blue);
+    color: var(--white);
+    padding: 32px;
+    height: fit-content;
+    position: sticky;
+    top: 84px;
+  }
+
+  .summary-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--yellow);
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(255,255,255,0.15);
+  }
+
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+  }
+
+  .summary-item-name { color: #aaa; }
+  .summary-item-val { font-weight: 700; text-align: right; }
+
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 10px;
+  }
+
+  .total-label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+  }
+
+  .total-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  
