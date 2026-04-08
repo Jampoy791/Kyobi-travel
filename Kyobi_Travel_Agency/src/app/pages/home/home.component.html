@@ -1,0 +1,324 @@
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-tag">✈ Book Your Next Adventure</span>
+        <h1>EXPLORE<br><em>BEYOND</em><br>LIMITS</h1>
+        <p>Curated travel experiences that redefine what it means to explore. Flights, hotels, packages — all in one bold destination.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="showPage('search')">🔍 Search Trips</button>
+          <button class="btn btn-yellow" onclick="showPage('packages')">📦 View Packages</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">180+</div>
+            <div class="stat-label">Destinations</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">50K+</div>
+            <div class="stat-label">Happy Travelers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4.9★</div>
+            <div class="stat-label">Average Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-frame">
+          <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80" alt="Travel hero">
+        </div>
+        <div class="hero-badge">
+          <strong>FREE</strong>
+          <span>Cancellation on all bookings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span class="marquee-item">FLIGHTS</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">HOTELS</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">PACKAGES</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">BALI</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">PARIS</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">TOKYO</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">SANTORINI</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">MALDIVES</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">ADVENTURES AWAIT</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">FLIGHTS</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">HOTELS</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">PACKAGES</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">BALI</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">PARIS</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">TOKYO</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">SANTORINI</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">MALDIVES</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">ADVENTURES AWAIT</span><span class="marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- SEARCH WIDGET (inline on homepage) -->
+  <div class="search-widget">
+    <div class="tab-bar">
+      <button class="tab active" onclick="switchTab(this,'tab-flights')">✈ Flights</button>
+      <button class="tab" onclick="switchTab(this,'tab-hotels')">🏨 Hotels</button>
+      <button class="tab" onclick="switchTab(this,'tab-packages-tab')">📦 Packages</button>
+    </div>
+
+    <div id="tab-flights" class="tab-content active">
+      <div class="form-row">
+        <div class="form-group">
+          <label>From → To</label>
+          <input type="text" id="flightRoute" placeholder="e.g. Manila → Tokyo" value="">
+        </div>
+        <div class="form-group">
+          <label>Departure</label>
+          <input type="date" id="flightDep">
+        </div>
+        <div class="form-group">
+          <label>Return</label>
+          <input type="date" id="flightRet">
+        </div>
+        <div class="form-group">
+          <label>Travelers</label>
+          <select id="flightTrav">
+            <option>1 Adult</option>
+            <option>2 Adults</option>
+            <option>2 Adults, 1 Child</option>
+            <option>2 Adults, 2 Children</option>
+            <option>Group (5+)</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="doSearch()">SEARCH</button>
+      </div>
+    </div>
+
+    <div id="tab-hotels" class="tab-content">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Destination</label>
+          <input type="text" placeholder="City or hotel name">
+        </div>
+        <div class="form-group">
+          <label>Check-in</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Check-out</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Guests & Rooms</label>
+          <select>
+            <option>1 Guest, 1 Room</option>
+            <option>2 Guests, 1 Room</option>
+            <option>2 Guests, 2 Rooms</option>
+            <option>Family (4+)</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="doSearch()">SEARCH</button>
+      </div>
+    </div>
+
+    <div id="tab-packages-tab" class="tab-content">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Destination</label>
+          <input type="text" placeholder="Where do you want to go?">
+        </div>
+        <div class="form-group">
+          <label>Travel Date</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Duration</label>
+          <select>
+            <option>3–5 Days</option>
+            <option>5–7 Days</option>
+            <option>7–10 Days</option>
+            <option>10+ Days</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Travelers</label>
+          <select>
+            <option>Solo</option>
+            <option>Couple</option>
+            <option>Family</option>
+            <option>Group</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('packages')">EXPLORE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED DESTINATIONS -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Hand-picked for you</span>
+          <h2 class="section-title">TRENDING<br>DESTINATIONS</h2>
+        </div>
+        <button class="btn btn-outline" onclick="showPage('search')">View All →</button>
+      </div>
+      <div class="dest-grid">
+        <!-- Card 1 -->
+        <div class="dest-card">
+          <div class="dest-img">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali">
+            <div class="dest-badge">🔥 Hot</div>
+            <button class="wishlist-btn" onclick="toggleWishlist(this,'Bali')">🤍</button>
+          </div>
+          <div class="dest-body">
+            <div class="dest-location">🇮🇩 Indonesia</div>
+            <div class="dest-name">Bali</div>
+            <div class="dest-desc">Lush rice terraces, spiritual temples, and a vibrant surf culture await you on the Island of the Gods.</div>
+            <div class="dest-footer">
+              <div class="dest-price">$899 <small>/person</small></div>
+              <div class="dest-rating"><span>★★★★★</span> 4.9</div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openBooking('Bali, Indonesia', 899)">Book Now →</button>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="dest-card">
+          <div class="dest-img">
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80" alt="Santorini">
+            <div class="dest-badge">✨ Popular</div>
+            <button class="wishlist-btn" onclick="toggleWishlist(this,'Santorini')">🤍</button>
+          </div>
+          <div class="dest-body">
+            <div class="dest-location">🇬🇷 Greece</div>
+            <div class="dest-name">Santorini</div>
+            <div class="dest-desc">Iconic white-washed buildings, cerulean domes, and the most romantic sunsets in the Mediterranean.</div>
+            <div class="dest-footer">
+              <div class="dest-price">$1,299 <small>/person</small></div>
+              <div class="dest-rating"><span>★★★★★</span> 4.8</div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openBooking('Santorini, Greece', 1299)">Book Now →</button>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="dest-card">
+          <div class="dest-img">
+            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Tokyo">
+            <div class="dest-badge">🌸 New</div>
+            <button class="wishlist-btn" onclick="toggleWishlist(this,'Tokyo')">🤍</button>
+          </div>
+          <div class="dest-body">
+            <div class="dest-location">🇯🇵 Japan</div>
+            <div class="dest-name">Tokyo</div>
+            <div class="dest-desc">Where neon-lit modernity meets ancient tradition — experience the world's most electrifying metropolis.</div>
+            <div class="dest-footer">
+              <div class="dest-price">$1,099 <small>/person</small></div>
+              <div class="dest-rating"><span>★★★★★</span> 4.9</div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openBooking('Tokyo, Japan', 1099)">Book Now →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES PREVIEW -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Best Value</span>
+          <h2 class="section-title">CURATED<br>PACKAGES</h2>
+        </div>
+        <button class="btn btn-outline" onclick="showPage('packages')">All Packages →</button>
+      </div>
+      <div class="packages-grid">
+        <div class="pkg-card featured">
+          <div class="pkg-img">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80" alt="Maldives">
+          </div>
+          <div class="pkg-body">
+            <div>
+              <span class="pkg-tag">⭐ Staff Pick</span>
+              <div class="pkg-name">Maldives Overwater Bliss</div>
+              <p class="pkg-desc">7 nights in a luxury overwater villa. Includes roundtrip flights, transfers, daily breakfast & dinner, and snorkeling excursion.</p>
+              <div class="pkg-includes">
+                <span class="include-chip">✈ Flight</span>
+                <span class="include-chip">🏨 Hotel</span>
+                <span class="include-chip">🍽 Meals</span>
+                <span class="include-chip">🤿 Activities</span>
+                <span class="include-chip">🚌 Transfers</span>
+              </div>
+            </div>
+            <div class="pkg-footer">
+              <div class="pkg-price">$3,499 <small>/person</small></div>
+              <button class="btn btn-primary" onclick="openBooking('Maldives Overwater Bliss', 3499)">Book Package →</button>
+            </div>
+          </div>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-img" style="height:200px">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="Paris">
+          </div>
+          <div class="pkg-body">
+            <span class="pkg-tag">🏙 City Break</span>
+            <div class="pkg-name">Paris Romance Weekend</div>
+            <p class="pkg-desc">5-day Parisian escape with boutique hotel, Seine river cruise, and Eiffel Tower access.</p>
+            <div class="pkg-includes">
+              <span class="include-chip">✈ Flight</span>
+              <span class="include-chip">🏨 Hotel</span>
+              <span class="include-chip">🛥 Cruise</span>
+            </div>
+            <div class="pkg-footer">
+              <div class="pkg-price">$1,899 <small>/person</small></div>
+              <button class="btn btn-yellow" onclick="openBooking('Paris Romance Weekend', 1899)">Book →</button>
+            </div>
+          </div>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-img" style="height:200px">
+            <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=600&q=80" alt="Thailand">
+          </div>
+          <div class="pkg-body">
+            <span class="pkg-tag">🌴 Adventure</span>
+            <div class="pkg-name">Thailand Island Hopper</div>
+            <p class="pkg-desc">Explore Phuket, Koh Samui & Krabi over 10 days. Boat transfers, snorkeling, local tours included.</p>
+            <div class="pkg-includes">
+              <span class="include-chip">✈ Flight</span>
+              <span class="include-chip">🏨 Hotel</span>
+              <span class="include-chip">🚤 Boats</span>
+              <span class="include-chip">🏊 Tours</span>
+            </div>
+            <div class="pkg-footer">
+              <div class="pkg-price">$2,199 <small>/person</small></div>
+              <button class="btn btn-yellow" onclick="openBooking('Thailand Island Hopper', 2199)">Book →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET PLANNER TEASER -->
+  <section class="budget-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Plan Smarter</span>
+          <h2 class="section-title" style="color:var(--yellow)">BUDGET<br>PLANNER</h2>
+        </div>
+        <button class="btn" style="background:var(--yellow);color:var(--blue);border:3px solid var(--yellow);box-shadow:5px 5px 0 rgba(255,255,255,0.2)" onclick="showPage('budget')">Open Full Planner →</button>
+      </div>
+      <p style="color:#aaa;font-size:16px;max-width:500px;margin-bottom:40px;line-height:1.7">Track every dollar of your travel budget. Allocate funds across flights, hotels, food, and activities with our interactive budget tool.</p>
+      <button class="btn btn-yellow" onclick="showPage('budget')">🧮 Launch Budget Planner</button>
+    </div>
+  </section>
+
+</div>
+<!-- /home page -->

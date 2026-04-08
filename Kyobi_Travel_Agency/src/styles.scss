@@ -1,29 +1,102 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --blue: #0A1628;
+    --blue-mid: #1A3A6B;
+    --blue-bright: #1E5CFF;
+    --yellow: #FFD600;
+    --yellow-dark: #E6C000;
+    --white: #FAFAF5;
+    --off-white: #F0EDE6;
+    --gray: #8A8A8A;
+    --border: 3px solid var(--blue);
+    --shadow: 5px 5px 0px var(--blue);
+    --shadow-yellow: 5px 5px 0px var(--yellow);
+    --radius: 0px;
+  }
 
-// Global Colors
-:root{
-    --navy-blue:#0c244c; 
-    --champagne-gold:#dbd3b7;
-    --tropical-green:#00abab;
-    --dark-green:#124747; 
-    --white:#fff;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-   --main-font:"League Spartan", sans-serif; 
-            font-optical-sizing: auto;
-            font-weight: 200;
-            font-style: normal;
+  html { scroll-behavior: smooth; }
 
-    --content-font:"League Spartan", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--white);
+    color: var(--blue);
+    overflow-x: hidden;
+    cursor: default;
+  }
 
-}
+  /* ===== BOOKING CONFIRMATION ===== */
+  .confirm-screen {
+    text-align: center;
+    padding: 80px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .confirm-icon {
+    font-size: 80px;
+    margin-bottom: 24px;
+  }
+
+  .confirm-screen h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+
+  body.dark .confirm-screen h2 { color: var(--yellow); }
+
+  .confirm-screen p { font-size: 18px; color: var(--gray); line-height: 1.6; margin-bottom: 32px; }
 
 
-html, body { height: 100%; }
-body { margin: 0; }
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; padding: 40px 20px; }
+    .hero-visual { height: 280px; }
+    .dest-grid { grid-template-columns: 1fr; }
+    .dest-card:nth-child(2), .dest-card:nth-child(3) { margin-top: 0; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .pkg-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .pkg-card.featured .pkg-img { min-height: 200px; }
+    .budget-inner { grid-template-columns: 1fr; }
+    .results-layout { grid-template-columns: 1fr; }
+    .filters-panel { position: static; }
+    .booking-layout { grid-template-columns: 1fr; }
+    .order-summary { position: static; }
+    .about-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    section { padding: 48px 20px; }
+    .search-widget { margin: 20px; }
+    .booking-form-card { padding: 20px; }
+  }
 
+  /* ===== UTILITY ===== */
+  .container { max-width: 1400px; margin: 0 auto; }
+  .mt-60 { margin-top: 60px; }
+  .hidden { display: none !important; }
+  .text-center { text-align: center; }
 
+  /* ===== TRIP CARDS ANIMATION ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
+  .dest-card, .pkg-card, .result-card {
+    animation: fadeUp 0.5s ease both;
+  }
 
+  .dest-card:nth-child(1) { animation-delay: 0s; }
+  .dest-card:nth-child(2) { animation-delay: 0.1s; }
+  .dest-card:nth-child(3) { animation-delay: 0.2s; }
+
+   /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--white); }
+  ::-webkit-scrollbar-thumb { background: var(--blue); }
