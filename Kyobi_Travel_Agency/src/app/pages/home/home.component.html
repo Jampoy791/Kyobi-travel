@@ -8,9 +8,9 @@
         <span class="hero-tag">✈ Book Your Next Adventure</span>
         <h1>EXPLORE<br><em>BEYOND</em><br>LIMITS</h1>
         <p>Curated travel experiences that redefine what it means to explore. Flights, hotels, packages — all in one bold destination.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;">
-          <button class="btn btn-primary" onclick="showPage('search')">🔍 Search Trips</button>
-          <button class="btn btn-yellow" onclick="showPage('packages')">📦 View Packages</button>
+        <div class="hero-actions">
+          <button class="btn btn-primary" routerLink="/search">🔍 Search Trips</button>
+          <button class="btn btn-yellow" routerLink="/packages">📦 View Packages</button>
         </div>
         <div class="hero-stats">
           <div class="stat-item">
@@ -154,7 +154,7 @@
             <option>Group</option>
           </select>
         </div>
-        <button class="btn btn-primary" onclick="showPage('packages')">EXPLORE</button>
+        <button class="btn btn-primary" routerLink="/packages">EXPLORE</button>
       </div>
     </div>
   </div>
@@ -167,7 +167,7 @@
           <span class="section-tag">Hand-picked for you</span>
           <h2 class="section-title">TRENDING<br>DESTINATIONS</h2>
         </div>
-        <button class="btn btn-outline" onclick="showPage('search')">View All →</button>
+        <button class="btn btn-outline" routerLink="/search">View All →</button>
       </div>
       <div class="dest-grid">
         <!-- Card 1 -->
@@ -185,7 +185,7 @@
               <div class="dest-price">$899 <small>/person</small></div>
               <div class="dest-rating"><span>★★★★★</span> 4.9</div>
             </div>
-            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openBooking('Bali, Indonesia', 899)">Book Now →</button>
+            <button class="btn btn-primary" onclick="openBooking('Bali, Indonesia', 899)">Book Now →</button>
           </div>
         </div>
         <!-- Card 2 -->
@@ -203,7 +203,7 @@
               <div class="dest-price">$1,299 <small>/person</small></div>
               <div class="dest-rating"><span>★★★★★</span> 4.8</div>
             </div>
-            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openBooking('Santorini, Greece', 1299)">Book Now →</button>
+            <button class="btn btn-primary" onclick="openBooking('Santorini, Greece', 1299)">Book Now →</button>
           </div>
         </div>
         <!-- Card 3 -->
@@ -221,7 +221,7 @@
               <div class="dest-price">$1,099 <small>/person</small></div>
               <div class="dest-rating"><span>★★★★★</span> 4.9</div>
             </div>
-            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openBooking('Tokyo, Japan', 1099)">Book Now →</button>
+            <button class="btn btn-primary" onclick="openBooking('Tokyo, Japan', 1099)">Book Now →</button>
           </div>
         </div>
       </div>
@@ -236,7 +236,7 @@
           <span class="section-tag">Best Value</span>
           <h2 class="section-title">CURATED<br>PACKAGES</h2>
         </div>
-        <button class="btn btn-outline" onclick="showPage('packages')">All Packages →</button>
+        <button class="btn btn-outline" routerLink="/packages">All Packages →</button>
       </div>
       <div class="packages-grid">
         <div class="pkg-card featured">
@@ -263,7 +263,7 @@
           </div>
         </div>
         <div class="pkg-card">
-          <div class="pkg-img" style="height:200px">
+          <div class="pkg-img">
             <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="Paris">
           </div>
           <div class="pkg-body">
@@ -282,7 +282,7 @@
           </div>
         </div>
         <div class="pkg-card">
-          <div class="pkg-img" style="height:200px">
+          <div class="pkg-img">
             <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=600&q=80" alt="Thailand">
           </div>
           <div class="pkg-body">
@@ -313,10 +313,10 @@
           <span class="section-tag">Plan Smarter</span>
           <h2 class="section-title" style="color:var(--yellow)">BUDGET<br>PLANNER</h2>
         </div>
-        <button class="btn" style="background:var(--yellow);color:var(--blue);border:3px solid var(--yellow);box-shadow:5px 5px 0 rgba(255,255,255,0.2)" onclick="showPage('budget')">Open Full Planner →</button>
+        <button class="btn" style="background:var(--yellow);color:var(--blue);border:3px solid var(--yellow);box-shadow:5px 5px 0 rgba(255,255,255,0.2)" routerLink="/budget">Open Full Planner →</button>
       </div>
       <p style="color:#aaa;font-size:16px;max-width:500px;margin-bottom:40px;line-height:1.7">Track every dollar of your travel budget. Allocate funds across flights, hotels, food, and activities with our interactive budget tool.</p>
-      <button class="btn btn-yellow" onclick="showPage('budget')">🧮 Launch Budget Planner</button>
+      <button class="btn btn-yellow" routerLink="/budget">🧮 Launch Budget Planner</button>
     </div>
   </section>
 
