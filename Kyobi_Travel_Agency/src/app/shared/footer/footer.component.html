@@ -2,23 +2,23 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <a class="logo" onclick="showPage('home')" href="#">WANDER<span style="color:#1E5CFF">LUST</span></a>
+      <a class="logo" routerLink="/">WANDER<span style="color:#1E5CFF">LUST</span></a>
       <p>Curated travel experiences for curious souls. Your journey begins with a single click.</p>
     </div>
     <div class="footer-col">
       <h4>Explore</h4>
       <ul>
-        <li><a onclick="showPage('home')">Home</a></li>
-        <li><a onclick="showPage('search')">Search Trips</a></li>
-        <li><a onclick="showPage('packages')">Packages</a></li>
-        <li><a onclick="showPage('budget')">Budget Planner</a></li>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/search">Search Trips</a></li>
+        <li><a routerLink="/packages">Packages</a></li>
+        <li><a routerLink="/budget">Budget Planner</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a onclick="showPage('about')">About Us</a></li>
-        <li><a onclick="showPage('about')">Our Team</a></li>
+        <li><a routerLink="/about">About Us</a></li>
+        <li><a routerLink="/about">Our Team</a></li>
         <li><a onclick="showToast('Coming soon!')">Careers</a></li>
         <li><a onclick="showToast('Coming soon!')">Press</a></li>
       </ul>
@@ -26,7 +26,7 @@
     <div class="footer-col">
       <h4>Support</h4>
       <ul>
-        <li><a onclick="showPage('about')">Contact</a></li>
+        <li><a routerLink="/about">Contact</a></li>
         <li><a onclick="showToast('Opening FAQ...')">FAQ</a></li>
         <li><a onclick="showToast('Opening policy...')">Privacy Policy</a></li>
         <li><a onclick="showToast('Opening terms...')">Terms of Use</a></li>
@@ -38,4 +38,3 @@
     <span>Made with ✈ in Manila</span>
   </div>
 </footer>
-<router-outlet></router-outlet>

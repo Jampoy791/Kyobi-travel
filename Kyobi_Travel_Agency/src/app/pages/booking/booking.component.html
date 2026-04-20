@@ -1,128 +1,68 @@
-<!-- ===== BOOKING PAGE ===== -->
-<div id="page-booking" class="page">
-  <section style="padding:60px 40px 40px;background:var(--off-white);border-bottom:var(--border)">
-    <div class="container">
-      <span class="section-tag">Secure Your Spot</span>
-      <h1 class="section-title" id="bookingDestTitle">BOOK YOUR<br>TRIP</h1>
-    </div>
-  </section>
-  <section style="padding:40px">
-    <div class="booking-layout">
-      <div>
-        <div class="booking-form-card" style="margin-bottom:24px">
-          <div class="form-section-title"><span class="step-num">1</span> Trip Details</div>
-          <div class="form-grid-2">
-            <div class="form-group">
-              <label>Destination</label>
-              <input type="text" id="bkDestination" placeholder="Where are you going?">
-            </div>
-            <div class="form-group">
-              <label>Trip Type</label>
-              <select>
-                <option>Round Trip</option>
-                <option>One Way</option>
-                <option>Multi-City</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Departure Date</label>
-              <input type="date" id="bkDep">
-            </div>
-            <div class="form-group">
-              <label>Return Date</label>
-              <input type="date" id="bkRet">
-            </div>
-            <div class="form-group">
-              <label>Adults</label>
-              <select id="bkAdults" onchange="updateOrderSummary()">
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5+</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Room Type</label>
-              <select id="bkRoom" onchange="updateOrderSummary()">
-                <option>Standard Room</option>
-                <option>Deluxe Room (+$200)</option>
-                <option>Suite (+$500)</option>
-                <option>Villa (+$1,200)</option>
-              </select>
-            </div>
-          </div>
-        </div>
- 
-        <div class="booking-form-card" style="margin-bottom:24px">
-          <div class="form-section-title"><span class="step-num">2</span> Personal Details</div>
-          <div class="form-grid-2">
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text" placeholder="Juan">
-            </div>
-            <div class="form-group">
-              <label>Last Name</label>
-              <input type="text" placeholder="dela Cruz">
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="juan@email.com">
-            </div>
-            <div class="form-group">
-              <label>Phone</label>
-              <input type="tel" placeholder="+63 912 345 6789">
-            </div>
-          </div>
-        </div>
- 
+<div class="page">
+
+  <h1 class="section-title">
+    {{ destination ? (destination | uppercase) : 'BOOK YOUR TRIP' }}
+  </h1>
+
+  <!-- FORM -->
+  <div class="booking-layout">
+
+    <div>
+      <form (ngSubmit)="confirmBooking()">
+        <!-- Trip Details -->
         <div class="booking-form-card">
-          <div class="form-section-title"><span class="step-num">3</span> Payment</div>
-          <div class="form-grid-2">
-            <div class="form-group" style="grid-column:span 2">
-              <label>Card Number</label>
-              <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
-            </div>
-            <div class="form-group">
-              <label>Expiry Date</label>
-              <input type="text" placeholder="MM / YY" maxlength="7">
-            </div>
-            <div class="form-group">
-              <label>CVV</label>
-              <input type="text" placeholder="123" maxlength="4">
-            </div>
-          </div>
-          <button class="btn btn-primary" style="margin-top:24px;width:100%;padding:16px;font-size:16px" onclick="confirmBooking()">✅ Confirm Booking</button>
+          <div class="form-section-title">Trip Details</div>
+
+          <input type="text" name="destination" [(ngModel)]="destination" placeholder="Where are you going?">
+
+          <select name="travelers" [(ngModel)]="travelers">
+            <option [ngValue]="1">1</option>
+            <option [ngValue]="2">2</option>
+            <option [ngValue]="3">3</option>
+            <option [ngValue]="4">4</option>
+            <option [ngValue]="5">5+</option>
+          </select>
+
+          <select name="room" [(ngModel)]="room">
+            <option [ngValue]="0">Standard Room</option>
+            <option [ngValue]="200">Deluxe Room (+$200)</option>
+            <option [ngValue]="500">Suite (+$500)</option>
+            <option [ngValue]="1200">Villa (+$1,200)</option>
+          </select>
+
         </div>
-      </div>
- 
-      <div class="order-summary">
-        <div class="summary-title">ORDER SUMMARY</div>
-        <div class="summary-item">
-          <span class="summary-item-name">Destination</span>
-          <span class="summary-item-val" id="sum-dest">—</span>
-        </div>
-        <div class="summary-item">
-          <span class="summary-item-name">Travelers</span>
-          <span class="summary-item-val" id="sum-travelers">2</span>
-        </div>
-        <div class="summary-item">
-          <span class="summary-item-name">Base Price</span>
-          <span class="summary-item-val" id="sum-base">—</span>
-        </div>
-        <div class="summary-item">
-          <span class="summary-item-name">Room Upgrade</span>
-          <span class="summary-item-val" id="sum-room">Included</span>
-        </div>
-        <div class="summary-item">
-          <span class="summary-item-name">Taxes & Fees</span>
-          <span class="summary-item-val" id="sum-tax">—</span>
-        </div>
-        <div class="summary-total">
-          <span class="total-label">Total</span>
-          <span class="total-amount" id="sum-total">—</span>
-        </div>
-      </div>
+
+        <!-- Confirm -->
+        <button type="submit">
+          ✅ Confirm Booking
+        </button>
+      </form>
+
     </div>
-  </section>
-</div><!-- /booking page -->
+
+    <!-- SUMMARY -->
+    <div class="order-summary">
+
+      <div>Destination: {{ destination || '—' }}</div>
+
+      <div>
+        Travelers:
+        {{ travelers }} {{ travelers === 1 ? 'Adult' : 'Adults' }}
+      </div>
+
+      <div>Base: ${{ base }}</div>
+
+      <div>
+        Room:
+        {{ roomExtra > 0 ? ('$' + roomExtra) : 'Included' }}
+      </div>
+
+      <div>Tax: ${{ tax }}</div>
+
+      <div><strong>Total: ${{ total }}</strong></div>
+
+    </div>
+
+  </div>
+</div>
+
