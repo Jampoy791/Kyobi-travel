@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 import { BudgetComponent } from './budget.component';
 
@@ -8,7 +10,10 @@ describe('BudgetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BudgetComponent]
+      imports: [BudgetComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: { params: of({}) } }
+      ]
     })
     .compileComponents();
 

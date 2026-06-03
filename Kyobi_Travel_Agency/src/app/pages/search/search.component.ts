@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { LegacyScriptService } from '../../services/legacy-script.service';
 
 @Component({
   selector: 'app-search',
@@ -6,7 +8,30 @@ import { Component } from '@angular/core';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent {
+export class SearchComponent implements AfterViewInit, OnDestroy {
+  private onLegacyData = (e: Event) => {
+    const detail = (e as CustomEvent).detail;
+    console.log('search legacy data', detail);
+    // you could call this.buildResultsList() or merge data here
+  };
+
+  constructor(private legacy: LegacyScriptService, @Inject(PLATFORM_ID) private platformId: Object) {}
+
+  async ngAfterViewInit(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) return; // Skip on server
+    try {
+      await this.legacy.loadScript('/assets/legacy/legacy.js');
+      window.initLegacy?.();
+      window.addEventListener('legacy:data', this.onLegacyData as EventListener);
+    } catch (err) {
+      console.error('Failed to load legacy script in SearchComponent', err);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    window.removeEventListener('legacy:data', this.onLegacyData as EventListener);
+  }
 // ===== RESULTS =====
   mockResults = [
     { type:'Hotel', name:'The Mulia Bali', loc:'Nusa Dua, Bali', price:349, stars:5, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=70', chips:['Pool','Spa','WiFi','Beach'] },
