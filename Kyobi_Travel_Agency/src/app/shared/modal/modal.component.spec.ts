@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 import { ModalComponent } from './modal.component';
 
@@ -8,7 +10,10 @@ describe('ModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalComponent]
+      imports: [ModalComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: { params: of({}) } }
+      ]
     })
     .compileComponents();
 

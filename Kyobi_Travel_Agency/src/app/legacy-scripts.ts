@@ -8,8 +8,6 @@ declare global {
     toggleWishlist: (btn: HTMLElement, name: string) => void;
     toggleStar: (btn: HTMLElement) => void;
     updateSlider: (name: string) => void;
-    updateBudget: () => void;
-    buildResultsList: () => void;
     showToast: (msg: string) => void;
     openBooking: (destination: string, price: number) => void;
   }
@@ -46,8 +44,8 @@ window.showPage = (id: string): void => {
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  if (id === 'search') window.buildResultsList();
-  if (id === 'budget') window.updateBudget();
+  if (id === 'search') window.buildResultsList?.();
+  if (id === 'budget') window.updateBudget?.();
 };
 
 window.switchTab = (btn: HTMLElement, contentId: string): void => {
@@ -115,7 +113,7 @@ window.updateSlider = (name: string): void => {
 
   const value = parseInt(slider.value, 10);
   valueLabel.textContent = `$${value.toLocaleString()}`;
-  window.updateBudget();
+  window.updateBudget?.();
 };
 
 window.updateBudget = (): void => {
@@ -254,7 +252,7 @@ function attachModalCloseHandlers(): void {
 function initializeLegacyScripts(): void {
   attachModalCloseHandlers();
   setDefaultDates();
-  window.updateBudget();
+  window.updateBudget?.();
 }
 
 if (document.readyState === 'loading') {
