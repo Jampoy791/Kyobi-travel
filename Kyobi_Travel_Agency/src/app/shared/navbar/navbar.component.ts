@@ -1,7 +1,6 @@
-import { Component, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, EventEmitter, Output, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import { LegacyScriptService } from '../../services/legacy-script.service';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -9,27 +8,39 @@ import { LegacyScriptService } from '../../services/legacy-script.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements AfterViewInit, OnDestroy {
-  private onLegacyData = (e: Event) => {
-    const detail = (e as CustomEvent).detail;
-    console.log('navbar legacy data', detail);
-  };
+export class NavbarComponent {
+  isMenuOpen = false;
+  isDarkMode = false;
+  @Output() modalRequested = new EventEmitter<'login' | 'signup'>();
 
-  constructor(private legacy: LegacyScriptService, @Inject(PLATFORM_ID) private platformId: Object) {}
-
-  async ngAfterViewInit(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) return; // Skip on server
-    try {
-      await this.legacy.loadScript('/assets/legacy/legacy.js');
-      window.initLegacy?.();
-      window.addEventListener('legacy:data', this.onLegacyData as EventListener);
-    } catch (err) {
-      console.error('Failed to load legacy script in NavbarComponent', err);
+  constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isDarkMode = localStorage.getItem('kyobi-dark-mode') === 'true';
+      this.applyDarkMode();
     }
   }
 
-  ngOnDestroy(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.removeEventListener('legacy:data', this.onLegacyData as EventListener);
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
+  }
+
+  openModal(type: 'login' | 'signup'): void {
+    this.modalRequested.emit(type);
+  }
+
+  toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    this.applyDarkMode();
+  }
+
+  private applyDarkMode(): void {
+    this.document.body.classList.toggle('dark', this.isDarkMode);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('kyobi-dark-mode', String(this.isDarkMode));
+    }
   }
 }

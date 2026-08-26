@@ -41,3 +41,4 @@ export class ToastComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 }
+ 

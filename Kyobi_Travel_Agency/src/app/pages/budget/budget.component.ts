@@ -1,66 +1,66 @@
-import { Component, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import { LegacyScriptService } from '../../services/legacy-script.service';
+import { Component } from '@angular/core';
 
+type BudgetCategory = 'flights' | 'hotels' | 'food' | 'activities' | 'shopping';
 
 @Component({
   selector: 'app-budget',
-  imports: [RouterModule],
+  imports: [],
   templateUrl: './budget.component.html',
   styleUrl: './budget.component.scss'
 })
-export class BudgetComponent implements AfterViewInit, OnDestroy {
-  private onLegacyData = (e: Event) => {
-    const detail = (e as CustomEvent).detail;
-    console.log('budget legacy data', detail);
+export class BudgetComponent {
+  readonly circumference = 251.2;
+  budgetTotal = 5000;
+  allocations: Record<BudgetCategory, number> = {
+    flights: 1500,
+    hotels: 1200,
+    food: 800,
+    activities: 600,
+    shopping: 300
   };
 
-  constructor(private legacy: LegacyScriptService, @Inject(PLATFORM_ID) private platformId: Object) {}
-
-  async ngAfterViewInit(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) return; // Skip on server
-    try {
-      await this.legacy.loadScript('/assets/legacy/legacy.js');
-      window.initLegacy?.();
-      window.addEventListener('legacy:data', this.onLegacyData as EventListener);
-    } catch (err) {
-      console.error('Failed to load legacy script in BudgetComponent', err);
-    }
+  get spent(): number {
+    return Object.values(this.allocations).reduce((total, amount) => total + amount, 0);
   }
 
-  ngOnDestroy(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.removeEventListener('legacy:data', this.onLegacyData as EventListener);
+  get remaining(): number {
+    return Math.max(this.budgetTotal - this.spent, 0);
   }
 
-  showPage(id: string): void {
-    document.querySelectorAll<HTMLElement>('.page').forEach(p => {
-      p.classList.remove('active');
-    });
-
-    const page = document.getElementById(`page-${id}`);
-
-    if (page instanceof HTMLElement) {
-      page.classList.add('active');
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    if (id === 'search') this.buildResultsList();
-    if (id === 'budget') this.updateBudget();
+  get isOverBudget(): boolean {
+    return this.spent > this.budgetTotal;
   }
 
-  buildResultsList(): void {
-    if (typeof window.buildResultsList === 'function') {
-      window.buildResultsList();
-    }
+  get chartTotal(): number {
+    return Math.max(this.budgetTotal, this.spent, 1);
   }
 
-  updateBudget(): void {
-    if (typeof window.updateBudget === 'function') {
-      window.updateBudget();
-    }
+  updateBudget(value: string): void {
+    const parsedValue = Number(value);
+    this.budgetTotal = Number.isFinite(parsedValue) ? Math.max(parsedValue, 0) : 0;
+  }
+
+  updateSlider(category: BudgetCategory, value: string): void {
+    const parsedValue = Number(value);
+    this.allocations[category] = Number.isFinite(parsedValue) ? Math.max(parsedValue, 0) : 0;
+  }
+
+  formatCurrency(amount: number): string {
+    return `$${Math.round(amount).toLocaleString('en-US')}`;
+  }
+
+  ringDash(category: BudgetCategory): string {
+    const length = (this.allocations[category] / this.chartTotal) * this.circumference;
+    return `${length} ${this.circumference - length}`;
+  }
+
+  ringOffset(category: BudgetCategory): string {
+    const categories: BudgetCategory[] = ['flights', 'hotels', 'food', 'activities', 'shopping'];
+    const categoryIndex = categories.indexOf(category);
+    const offset = categories
+      .slice(0, categoryIndex)
+      .reduce((total, previousCategory) => total + this.allocations[previousCategory], 0);
+    return `${-(offset / this.chartTotal) * this.circumference}`;
   }
 
 }

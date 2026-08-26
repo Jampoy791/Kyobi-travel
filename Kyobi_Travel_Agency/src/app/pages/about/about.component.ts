@@ -1,39 +1,24 @@
-import { Component, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { LegacyScriptService } from '../../services/legacy-script.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent implements AfterViewInit, OnDestroy {
-  private onLegacyData = (e: Event) => {
-    const detail = (e as CustomEvent).detail;
-    // handle legacy data (map into component state)
-    console.log('legacy data received', detail);
-  };
+export class AboutComponent {
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
-  constructor(private legacy: LegacyScriptService, @Inject(PLATFORM_ID) private platformId: Object) {}
-
-  async ngAfterViewInit(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) return; // Skip on server
-    try {
-      // adjust the path to your legacy script(s)
-      await this.legacy.loadScript('/assets/legacy/legacy.js');
-      // call an initializer if the legacy script exposes one
-      window.initLegacy?.();
-      window.addEventListener('legacy:data', this.onLegacyData as EventListener);
-    } catch (err) {
-      console.error('Failed to load legacy script', err);
+  scrollToContact(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  ngOnDestroy(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.removeEventListener('legacy:data', this.onLegacyData as EventListener);
-    // optionally remove script when component destroyed
-    // this.legacy.removeScript('/assets/legacy/legacy.js');
+  goToPackages(): void {
+    this.router.navigate(['/packages']);
   }
+
 }

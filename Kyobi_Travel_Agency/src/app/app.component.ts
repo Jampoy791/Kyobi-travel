@@ -7,17 +7,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-
-
-
-
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
-
-
-
-
+import { PackagesComponent } from './pages/packages/packages.component';
+import { ModalComponent } from './shared/modal/modal.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +23,7 @@ import { HomeComponent } from './pages/home/home.component';
     MatListModule,
     MatMenuModule,
     MatSidenavModule,
-    MatExpansionModule],
+    MatExpansionModule, ModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

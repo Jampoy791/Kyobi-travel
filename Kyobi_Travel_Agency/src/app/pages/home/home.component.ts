@@ -1,7 +1,6 @@
-import { Component, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import { LegacyScriptService } from '../../services/legacy-script.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,28 +8,28 @@ import { LegacyScriptService } from '../../services/legacy-script.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
-  private onLegacyData = (e: Event) => {
-    const detail = (e as CustomEvent).detail;
-    console.log('home legacy data', detail);
-  };
+export class HomeComponent {
+  activeTab: 'flights' | 'hotels' | 'packages' = 'flights';
+  wishlistedDestinations = new Set<string>();
 
-  constructor(private legacy: LegacyScriptService, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private router: Router) {}
 
-  async ngAfterViewInit(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) return; // Skip on server
-    try {
-      await this.legacy.loadScript('/assets/legacy/legacy.js');
-      window.initLegacy?.();
-      window.addEventListener('legacy:data', this.onLegacyData as EventListener);
-    } catch (err) {
-      console.error('Failed to load legacy script in HomeComponent', err);
-    }
+  selectTab(tab: 'flights' | 'hotels' | 'packages'): void {
+    this.activeTab = tab;
   }
 
-  ngOnDestroy(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.removeEventListener('legacy:data', this.onLegacyData as EventListener);
+  toggleWishlist(destination: string): void {
+    const nextWishlist = new Set(this.wishlistedDestinations);
+    nextWishlist.has(destination) ? nextWishlist.delete(destination) : nextWishlist.add(destination);
+    this.wishlistedDestinations = nextWishlist;
+  }
+
+  searchTrips(): void {
+    this.router.navigate(['/search']);
+  }
+
+  bookTrip(destination: string, price: number): void {
+    this.router.navigate(['/booking'], { queryParams: { destination, price } });
   }
 
 }

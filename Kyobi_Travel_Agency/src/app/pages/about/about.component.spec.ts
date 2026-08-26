@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 
 import { AboutComponent } from './about.component';
@@ -12,7 +13,8 @@ describe('AboutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AboutComponent],
       providers: [
-        { provide: ActivatedRoute, useValue: { params: of({}) } }
+        { provide: ActivatedRoute, useValue: { params: of({}) } },
+        provideRouter([])
       ]
     })
     .compileComponents();

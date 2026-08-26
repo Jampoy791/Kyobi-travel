@@ -1,103 +1,198 @@
- /* ===== BOOKING PAGE ===== */
-  .booking-layout {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+:host {
+  display: block;
+  color: var(--blue);
+}
 
-  .booking-form-card {
-    border: var(--border);
-    background: var(--white);
-    box-shadow: var(--shadow);
-    padding: 36px;
-  }
+.booking-page { overflow: hidden; }
+.booking-page,
+.booking-page * { box-sizing: border-box; }
+.booking-shell { width: min(1200px, 100%); margin-inline: auto; }
+.booking-page section { padding: clamp(52px, 8vw, 92px) clamp(20px, 5vw, 64px); }
 
-  body.dark .booking-form-card { background: #1A1A1A; }
+.booking-intro {
+  background: var(--off-white);
+  border-bottom: var(--border);
+}
 
-  .form-section-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 20px;
-    margin-bottom: 22px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--off-white);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+.section-tag {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--blue-bright);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 
-  body.dark .form-section-title { border-color: #333; }
+.section-title {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--blue);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 7vw, 88px);
+  letter-spacing: 1px;
+  line-height: .9;
+}
 
-  .step-num {
-    width: 28px;
-    height: 28px;
-    background: var(--blue);
-    color: var(--yellow);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
+.booking-intro p {
+  max-width: 500px;
+  margin: 22px 0 0;
+  color: var(--blue-mid);
+  font-size: 17px;
+  line-height: 1.6;
+}
 
-  body.dark .step-num { background: var(--yellow); color: #0D0D0D; }
+.booking-content { background: var(--white); }
+.booking-form { margin: 0; }
+.booking-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: clamp(28px, 6vw, 72px);
+  align-items: start;
+}
 
-  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.booking-form { min-width: 0; }
+.booking-form-card {
+  padding: clamp(24px, 4vw, 40px);
+  background: var(--white);
+  border: var(--border);
+  box-shadow: var(--shadow);
+}
 
-  .order-summary {
-    border: var(--border);
-    background: var(--blue);
-    color: var(--white);
-    padding: 32px;
-    height: fit-content;
-    position: sticky;
-    top: 84px;
-  }
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 26px;
+  border-bottom: 2px solid var(--off-white);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
 
-  .summary-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--yellow);
-    margin-bottom: 22px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid rgba(255,255,255,0.15);
-  }
+.form-section-title span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  background: var(--blue);
+  color: var(--yellow);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+}
 
-  .summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-size: 14px;
-  }
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
 
-  .summary-item-name { color: #aaa; }
-  .summary-item-val { font-weight: 700; text-align: right; }
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: 20px;
+}
+.full-field { width: 100%; }
+.form-field label {
+  color: var(--gray);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 2px solid #d6d2cb;
+  background: var(--white);
+  color: var(--blue);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  outline: none;
+}
+.form-field select { appearance: auto; }
+.form-field input:focus,
+.form-field select:focus { border-color: var(--blue-bright); }
+.field-error { color: #c44128; font-size: 12px; font-weight: 700; }
 
-  .summary-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    margin-top: 10px;
-  }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 20px;
+  border: var(--border);
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.btn-primary { background: var(--blue); color: var(--yellow); box-shadow: var(--shadow-yellow); }
+.btn:hover { transform: translate(-2px, -2px); }
+.btn:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: 3px; }
+.confirm-button { width: 100%; margin-top: 24px; }
+.confirm-button span { margin-left: 10px; font-size: 20px; }
 
-  .total-label {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #aaa;
-  }
+.order-summary {
+  position: sticky;
+  top: 84px;
+  padding: 30px;
+  background: var(--blue);
+  color: var(--white);
+  border: var(--border);
+  box-shadow: 8px 8px 0 var(--yellow);
+}
+.summary-kicker { color: #b7c2d4; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.summary-title {
+  padding-bottom: 18px;
+  margin: 10px 0 8px;
+  border-bottom: 2px solid rgba(255,255,255,.16);
+  color: var(--yellow);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  line-height: .9;
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  font-size: 14px;
+}
+.summary-item span { color: #b7c2d4; }
+.summary-item strong { max-width: 58%; color: var(--white); text-align: right; overflow-wrap: anywhere; }
+.summary-total { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 22px; }
+.summary-total span { color: #b7c2d4; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.summary-total strong { color: var(--yellow); font-family: 'Bebas Neue', sans-serif; font-size: 46px; line-height: 1; }
+.summary-note { margin: 18px 0 0; color: #b7c2d4; font-size: 12px; line-height: 1.5; }
 
-  .total-amount {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    color: var(--yellow);
-    line-height: 1;
-  }
+.confirmation-section { min-height: 58vh; background: var(--off-white); }
+.confirmation-card { max-width: 680px; margin-inline: auto; padding: clamp(28px, 6vw, 64px); background: var(--white); border: var(--border); box-shadow: var(--shadow); }
+.confirmation-mark { display: grid; width: 56px; height: 56px; margin-bottom: 24px; place-items: center; background: var(--yellow); border: var(--border); font-size: 32px; font-weight: 800; }
+.confirmation-card h2 { margin: 0 0 18px; color: var(--blue); font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 72px); line-height: .9; }
+.confirmation-card p { max-width: 520px; margin: 0 0 28px; color: var(--gray); font-size: 16px; line-height: 1.6; }
 
-  
+@media (max-width: 850px) {
+  .booking-layout { grid-template-columns: 1fr; }
+  .order-summary { position: static; order: -1; }
+}
+
+@media (max-width: 560px) {
+  .booking-page section { padding-block: 48px; }
+  .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+  .order-summary { padding: 24px 20px; }
+  .summary-total { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .summary-total strong { font-size: 38px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover { transform: none; }
+}
