@@ -1,75 +1,88 @@
-<!-- ===== SEARCH RESULTS PAGE ===== -->
-<div id="page-search" class="page">
-  <section style="padding:40px 40px 20px;border-bottom:var(--border);background:var(--off-white)">
-    <div class="container">
-      <span class="section-tag">Showing results for</span>
-      <h1 class="section-title" id="searchHeading">ALL DESTINATIONS</h1>
+<div id="page-search" class="search-page">
+  <section class="search-intro">
+    <div class="search-shell">
+      <span class="section-tag">Curated for your next escape</span>
+      <h1 class="section-title">FIND YOUR<br>WAY OUT</h1>
     </div>
   </section>
-  <section style="padding:40px">
-    <div class="results-layout">
-        
-      <!-- Filters -->
-      <aside class="filters-panel">
-        <div class="filter-title">Filters</div>
- 
+
+  <section class="search-content">
+    <div class="search-shell results-layout">
+      <aside class="filters-panel" aria-label="Search filters">
+        <div class="filter-title">Refine the route</div>
+
         <div class="filter-section">
-          <label class="filter-label">Price Range</label>
+          <label class="filter-label" for="priceMin">Price range</label>
           <div class="price-inputs">
-            <input type="number" id="priceMin" value="500" placeholder="Min">
-            <span>—</span>
-            <input type="number" id="priceMax" value="5000" placeholder="Max">
+            <input id="priceMin" type="number" min="0" step="50" [(ngModel)]="priceMin" placeholder="Min">
+            <span aria-hidden="true">to</span>
+            <input id="priceMax" type="number" min="0" step="50" [(ngModel)]="priceMax" placeholder="Max">
           </div>
         </div>
- 
+
         <div class="filter-section">
-          <label class="filter-label">Star Rating</label>
-          <div class="star-filter">
-            <button class="star-btn" onclick="toggleStar(this)">★ 5</button>
-            <button class="star-btn active" onclick="toggleStar(this)">★ 4+</button>
-            <button class="star-btn" onclick="toggleStar(this)">★ 3+</button>
-            <button class="star-btn" onclick="toggleStar(this)">Any</button>
+          <span class="filter-label">Star rating</span>
+          <div class="star-filter" role="group" aria-label="Minimum star rating">
+            <button type="button" class="star-btn" [class.active]="selectedRating === 5" (click)="setRating(5)">★ 5</button>
+            <button type="button" class="star-btn" [class.active]="selectedRating === 4" (click)="setRating(4)">★ 4+</button>
+            <button type="button" class="star-btn" [class.active]="selectedRating === 3" (click)="setRating(3)">★ 3+</button>
+            <button type="button" class="star-btn" [class.active]="selectedRating === 0" (click)="setRating(0)">Any</button>
           </div>
         </div>
- 
+
         <div class="filter-section">
-          <label class="filter-label">Destination Type</label>
-          <label class="amenity-check"><input type="checkbox" checked> Beach</label>
-          <label class="amenity-check"><input type="checkbox" checked> City</label>
-          <label class="amenity-check"><input type="checkbox"> Mountain</label>
-          <label class="amenity-check"><input type="checkbox"> Countryside</label>
-          <label class="amenity-check"><input type="checkbox"> Cultural</label>
+          <span class="filter-label">Trip type</span>
+          <label class="amenity-check"><input type="checkbox" (change)="toggleType('Hotel', $any($event.target).checked)"> Hotels</label>
+          <label class="amenity-check"><input type="checkbox" (change)="toggleType('Flight', $any($event.target).checked)"> Flights</label>
+          <label class="amenity-check"><input type="checkbox" (change)="toggleType('Package', $any($event.target).checked)"> Packages</label>
         </div>
- 
-        <div class="filter-section">
-          <label class="filter-label">Amenities</label>
-          <label class="amenity-check"><input type="checkbox" checked> Pool</label>
-          <label class="amenity-check"><input type="checkbox" checked> WiFi</label>
-          <label class="amenity-check"><input type="checkbox"> Spa</label>
-          <label class="amenity-check"><input type="checkbox"> Gym</label>
-          <label class="amenity-check"><input type="checkbox"> Pet-Friendly</label>
-        </div>
- 
-        <button class="btn btn-primary" style="width:100%" onclick="showToast('Filters applied!')">Apply Filters</button>
+
+        <button class="btn btn-primary filter-submit" type="button" (click)="applyFilters()">Apply filters</button>
+        <p class="filter-feedback" [class.visible]="filtersApplied">Showing your tailored route.</p>
       </aside>
- 
-      <!-- Results -->
-      <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
-          <span style="font-weight:700;font-size:14px">6 Results Found</span>
-          <select style="padding:8px 12px;border:2px solid #ddd;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;background:var(--white);color:var(--blue)">
-            <option>Sort: Best Match</option>
-            <option>Sort: Price Low–High</option>
-            <option>Sort: Price High–Low</option>
-            <option>Sort: Rating</option>
-          </select>
+
+      <div class="results-main">
+        <div class="results-toolbar">
+          <span class="result-count"><strong>{{ filteredResults.length }}</strong> destinations found</span>
+          <label class="sort-control">Sort by
+            <select [(ngModel)]="sortBy" aria-label="Sort results">
+              <option value="match">Best match</option>
+              <option value="price-low">Price low to high</option>
+              <option value="price-high">Price high to low</option>
+              <option value="rating">Rating</option>
+            </select>
+          </label>
         </div>
- 
-        <!-- Result Cards -->
-        <div id="resultsList"></div>
+
+        <div class="results-list">
+          @for (result of filteredResults; track result.name; let index = $index) {
+            <article class="result-card" [style.animation-delay.ms]="index * 70">
+              <div class="result-img">
+                <img [src]="result.img" [alt]="result.name" loading="lazy">
+              </div>
+              <div class="result-body">
+                <div class="result-type">{{ resultIcon(result.type) }} {{ result.type }}</div>
+                <h2 class="result-name">{{ result.name }}</h2>
+                <p class="result-location">📍 {{ result.loc }}</p>
+                <div class="result-chips">
+                  @for (chip of result.chips; track chip) { <span class="chip">{{ chip }}</span> }
+                </div>
+              </div>
+              <div class="result-price-side">
+                <div class="result-rating"><span class="stars">{{ '★'.repeat(result.stars) }}{{ '☆'.repeat(5 - result.stars) }}</span>{{ result.stars }}.0 / 5</div>
+                <div class="result-price">${{ result.price.toLocaleString() }}<small>/person</small></div>
+                <a class="btn btn-primary result-action" routerLink="/booking">Book trip</a>
+              </div>
+            </article>
+          } @empty {
+            <div class="empty-results">
+              <span class="section-tag">No exact matches</span>
+              <h2>WIDEN THE HORIZON</h2>
+              <p>Try a broader price range or choose a lower star rating to see more routes.</p>
+            </div>
+          }
+        </div>
       </div>
     </div>
   </section>
 </div>
-
-<!-- /search page -->

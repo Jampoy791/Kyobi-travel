@@ -2,11 +2,12 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <a class="logo" routerLink="/">WANDER<span style="color:#1E5CFF">LUST</span></a>
+      <a class="logo" routerLink="/" aria-label="Wanderlust home">WANDER<span>LUST</span></a>
       <p>Curated travel experiences for curious souls. Your journey begins with a single click.</p>
+      <span class="footer-origin">Based in Manila · Going everywhere</span>
     </div>
     <div class="footer-col">
-      <h4>Explore</h4>
+      <h2>Explore</h2>
       <ul>
         <li><a routerLink="/">Home</a></li>
         <li><a routerLink="/search">Search Trips</a></li>
@@ -15,21 +16,21 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h2>Company</h2>
       <ul>
         <li><a routerLink="/about">About Us</a></li>
         <li><a routerLink="/about">Our Team</a></li>
-        <li><a onclick="showToast('Coming soon!')">Careers</a></li>
-        <li><a onclick="showToast('Coming soon!')">Press</a></li>
+        <li><button type="button" (click)="showNotice('Careers information is coming soon.')">Careers</button></li>
+        <li><button type="button" (click)="showNotice('Press information is coming soon.')">Press</button></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Support</h4>
+      <h2>Support</h2>
       <ul>
         <li><a routerLink="/about">Contact</a></li>
-        <li><a onclick="showToast('Opening FAQ...')">FAQ</a></li>
-        <li><a onclick="showToast('Opening policy...')">Privacy Policy</a></li>
-        <li><a onclick="showToast('Opening terms...')">Terms of Use</a></li>
+        <li><button type="button" (click)="showNotice('FAQ information is coming soon.')">FAQ</button></li>
+        <li><button type="button" (click)="showNotice('Privacy Policy information is coming soon.')">Privacy Policy</button></li>
+        <li><button type="button" (click)="showNotice('Terms of Use information is coming soon.')">Terms of Use</button></li>
       </ul>
     </div>
   </div>
@@ -37,4 +38,5 @@
     <span>© 2026 Wanderlust Travel Agency. All rights reserved.</span>
     <span>Made with ✈ in Manila</span>
   </div>
+  <p class="footer-notice" [class.visible]="notice" aria-live="polite">{{ notice }}</p>
 </footer>

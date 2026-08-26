@@ -1,17 +1,25 @@
 <!-- NAV -->
 <nav>
-  <a routerLink="/" class="logo">WANDER<span>LUST</span></a>
-  <ul class="nav-links">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/search">Search</a></li>
-    <li><a routerLink="/packages">Packages</a></li>
-    <li><a routerLink="/budget">Budget</a></li>
-    <li><a routerLink="/about">About</a></li>
+  <a routerLink="/" class="logo">Kyobi<span>Travel</span></a>
+  <button class="menu-toggle" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-controls="primary-navigation">
+    <span class="menu-icon" aria-hidden="true">{{ isMenuOpen ? '×' : '☰' }}</span>
+    <span class="sr-only">{{ isMenuOpen ? 'Close menu' : 'Open menu' }}</span>
+  </button>
+  <ul id="primary-navigation" class="nav-links" [class.menu-open]="isMenuOpen">
+    <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
+    <li><a routerLink="/search" (click)="closeMenu()">Search</a></li>
+    <li><a routerLink="/packages" (click)="closeMenu()">Packages</a></li>
+    <li><a routerLink="/budget" (click)="closeMenu()">Budget</a></li>
+    <li><a routerLink="/about" (click)="closeMenu()">About</a></li>
+    <li class="mobile-auth">
+      <button class="btn btn-outline" type="button" (click)="openModal('login'); closeMenu()">Login</button>
+      <button class="btn btn-primary" type="button" (click)="openModal('signup'); closeMenu()">Sign Up</button>
+    </li>
   </ul>
   <div class="nav-actions">
-    <button class="btn btn-outline" onclick="openModal('login')">Login</button>
-    <button class="btn btn-primary" onclick="openModal('signup')">Sign Up</button>
-    <button id="darkToggle" onclick="toggleDark()" title="Toggle Dark Mode">🌙</button>
+    <button class="btn btn-outline" type="button" (click)="openModal('login')">Login</button>
+    <button class="btn btn-primary" type="button" (click)="openModal('signup')">Sign Up</button>
+    <button id="darkToggle" type="button" (click)="toggleDarkMode()" [attr.aria-pressed]="isDarkMode" [attr.title]="isDarkMode ? 'Use light mode' : 'Use dark mode'" [attr.aria-label]="isDarkMode ? 'Use light mode' : 'Use dark mode'">{{ isDarkMode ? '☀' : '🌙' }}</button>
   </div>
 </nav>
 

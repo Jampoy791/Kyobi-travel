@@ -1,39 +1,39 @@
 <!-- LOGIN MODAL -->
-<div id="modal-login" class="modal-overlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>SIGN IN</h2>
+<div id="modal-login" class="modal-overlay" role="presentation" [class.open]="activeModal === 'login'" (click)="closeModal()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title" (click)="$event.stopPropagation()">
+    <button class="modal-close" type="button" aria-label="Close sign in dialog" (click)="closeModal()">✕</button>
+    <h2 id="login-title">SIGN IN</h2>
     <div class="form-group" style="margin-bottom:14px">
-      <label>Email</label>
-      <input type="email" placeholder="you@email.com">
+      <label for="login-email">Email</label>
+      <input id="login-email" type="email" autocomplete="email" placeholder="you@email.com">
     </div>
     <div class="form-group" style="margin-bottom:20px">
-      <label>Password</label>
-      <input type="password" placeholder="••••••••">
+      <label for="login-password">Password</label>
+      <input id="login-password" type="password" autocomplete="current-password" placeholder="••••••••">
     </div>
-    <button class="btn btn-primary" style="width:100%" onclick="closeModal();showToast('Welcome back, traveler!')">Login →</button>
-    <div class="modal-toggle">Don't have an account? <a onclick="closeModal();openModal('signup')">Sign Up</a></div>
+    <button class="btn btn-primary" type="button" style="width:100%" (click)="closeModal()">Login →</button>
+    <div class="modal-toggle">Don't have an account? <button type="button" (click)="openModal('signup')">Sign Up</button></div>
   </div>
 </div>
  
 <!-- SIGNUP MODAL -->
-<div id="modal-signup" class="modal-overlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>JOIN US</h2>
+<div id="modal-signup" class="modal-overlay" role="presentation" [class.open]="activeModal === 'signup'" (click)="closeModal()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="signup-title" (click)="$event.stopPropagation()">
+    <button class="modal-close" type="button" aria-label="Close sign up dialog" (click)="closeModal()">✕</button>
+    <h2 id="signup-title">JOIN US</h2>
     <div class="form-grid-2" style="margin-bottom:14px">
-      <div class="form-group"><label>First Name</label><input type="text" placeholder="Juan"></div>
-      <div class="form-group"><label>Last Name</label><input type="text" placeholder="dela Cruz"></div>
+      <div class="form-group"><label for="signup-first-name">First Name</label><input id="signup-first-name" type="text" autocomplete="given-name" placeholder="Juan"></div>
+      <div class="form-group"><label for="signup-last-name">Last Name</label><input id="signup-last-name" type="text" autocomplete="family-name" placeholder="dela Cruz"></div>
     </div>
     <div class="form-group" style="margin-bottom:14px">
-      <label>Email</label>
-      <input type="email" placeholder="you@email.com">
+      <label for="signup-email">Email</label>
+      <input id="signup-email" type="email" autocomplete="email" placeholder="you@email.com">
     </div>
     <div class="form-group" style="margin-bottom:20px">
-      <label>Password</label>
-      <input type="password" placeholder="Create a strong password">
+      <label for="signup-password">Password</label>
+      <input id="signup-password" type="password" autocomplete="new-password" placeholder="Create a strong password">
     </div>
-    <button class="btn btn-primary" style="width:100%" onclick="closeModal();showToast('Account created! Welcome aboard 🎉')">Create Account →</button>
-    <div class="modal-toggle">Already have an account? <a onclick="closeModal();openModal('login')">Login</a></div>
+    <button class="btn btn-primary" type="button" style="width:100%" (click)="closeModal()">Create Account →</button>
+    <div class="modal-toggle">Already have an account? <button type="button" (click)="openModal('login')">Login</button></div>
   </div>
 </div>

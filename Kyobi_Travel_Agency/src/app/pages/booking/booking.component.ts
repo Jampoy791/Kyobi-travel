@@ -1,42 +1,30 @@
-import { Component, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LegacyScriptService } from '../../services/legacy-script.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './booking.component.html'
+  templateUrl: './booking.component.html',
+  styleUrl: './booking.component.scss'
 })
-export class BookingComponent implements AfterViewInit, OnDestroy {
-  private onLegacyData = (e: Event) => {
-    const detail = (e as CustomEvent).detail;
-    console.log('booking legacy data', detail);
-  };
-
-  constructor(private legacy: LegacyScriptService, @Inject(PLATFORM_ID) private platformId: Object) {}
-
-  async ngAfterViewInit(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) return; // Skip on server
-    try {
-      await this.legacy.loadScript('/assets/legacy/legacy.js');
-      window.initLegacy?.();
-      window.addEventListener('legacy:data', this.onLegacyData as EventListener);
-    } catch (err) {
-      console.error('Failed to load legacy script in BookingComponent', err);
-    }
+export class BookingComponent {
+  constructor(private route: ActivatedRoute) {
+    const queryParams = this.route.snapshot?.queryParams ?? {};
+    this.destination = queryParams['destination'] ?? '';
+    const queryPrice = Number(queryParams['price']);
+    if (Number.isFinite(queryPrice) && queryPrice > 0) this.currentPrice = queryPrice;
   }
 
-  ngOnDestroy(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.removeEventListener('legacy:data', this.onLegacyData as EventListener);
-  }
 
   destination: string = '';
   travelers: number = 2;
   room: number = 0;
   currentPrice: number = 1000; // example base price
+  submitted = false;
+  confirmed = false;
 
   get roomExtra(): number {
     return this.room;
@@ -55,6 +43,9 @@ export class BookingComponent implements AfterViewInit, OnDestroy {
   }
 
   confirmBooking(): void {
-    alert(`🎉 Booking confirmed for ${this.destination || 'your destination'}!`);
+    this.submitted = true;
+    if (this.destination.trim()) {
+      this.confirmed = true;
+    }
   }
 }

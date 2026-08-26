@@ -1,68 +1,66 @@
-<div class="page">
+<div class="booking-page">
 
-  <h1 class="section-title">
-    {{ destination ? (destination | uppercase) : 'BOOK YOUR TRIP' }}
-  </h1>
-
-  <!-- FORM -->
-  <div class="booking-layout">
-
-    <div>
-      <form (ngSubmit)="confirmBooking()">
-        <!-- Trip Details -->
-        <div class="booking-form-card">
-          <div class="form-section-title">Trip Details</div>
-
-          <input type="text" name="destination" [(ngModel)]="destination" placeholder="Where are you going?">
-
-          <select name="travelers" [(ngModel)]="travelers">
-            <option [ngValue]="1">1</option>
-            <option [ngValue]="2">2</option>
-            <option [ngValue]="3">3</option>
-            <option [ngValue]="4">4</option>
-            <option [ngValue]="5">5+</option>
-          </select>
-
-          <select name="room" [(ngModel)]="room">
-            <option [ngValue]="0">Standard Room</option>
-            <option [ngValue]="200">Deluxe Room (+$200)</option>
-            <option [ngValue]="500">Suite (+$500)</option>
-            <option [ngValue]="1200">Villa (+$1,200)</option>
-          </select>
-
-        </div>
-
-        <!-- Confirm -->
-        <button type="submit">
-          ✅ Confirm Booking
-        </button>
-      </form>
-
+  <section class="booking-intro">
+    <div class="booking-shell">
+      <span class="section-tag">One step closer</span>
+      <h1 class="section-title">{{ destination ? (destination | uppercase) : 'BOOK YOUR TRIP' }}</h1>
+      <p>Lock in the essentials now. You can refine the details with your travel advisor later.</p>
     </div>
+  </section>
 
-    <!-- SUMMARY -->
-    <div class="order-summary">
-
-      <div>Destination: {{ destination || '—' }}</div>
-
-      <div>
-        Travelers:
-        {{ travelers }} {{ travelers === 1 ? 'Adult' : 'Adults' }}
+  @if (confirmed) {
+    <section class="confirmation-section">
+      <div class="confirmation-card">
+        <span class="confirmation-mark">✓</span>
+        <span class="section-tag">Reservation received</span>
+        <h2>YOU'RE GOING<br>{{ destination | uppercase }}</h2>
+        <p>Your trip request is ready. Our travel team will follow up with the final itinerary and payment details.</p>
+        <button class="btn btn-primary" type="button" (click)="confirmed = false; submitted = false">Edit booking</button>
       </div>
+    </section>
+  } @else {
+    <section class="booking-content">
+      <div class="booking-shell booking-layout">
+        <form class="booking-form" (ngSubmit)="confirmBooking()" novalidate>
+          <div class="booking-form-card">
+            <div class="form-section-title"><span>01</span> Trip details</div>
 
-      <div>Base: ${{ base }}</div>
+            <div class="form-field full-field">
+              <label for="destination">Where are you going?</label>
+              <input id="destination" type="text" name="destination" [(ngModel)]="destination" placeholder="e.g. Kyoto, Japan" required>
+              @if (submitted && !destination.trim()) { <span class="field-error">Tell us where you want to go.</span> }
+            </div>
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label for="travelers">Travelers</label>
+                <select id="travelers" name="travelers" [(ngModel)]="travelers">
+                  <option [ngValue]="1">1 traveler</option><option [ngValue]="2">2 travelers</option><option [ngValue]="3">3 travelers</option><option [ngValue]="4">4 travelers</option><option [ngValue]="5">5+ travelers</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="room">Stay style</label>
+                <select id="room" name="room" [(ngModel)]="room">
+                  <option [ngValue]="0">Standard room</option><option [ngValue]="200">Deluxe room +$200</option><option [ngValue]="500">Suite +$500</option><option [ngValue]="1200">Villa +$1,200</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary confirm-button" type="submit">Confirm booking <span>→</span></button>
+        </form>
 
-      <div>
-        Room:
-        {{ roomExtra > 0 ? ('$' + roomExtra) : 'Included' }}
+        <aside class="order-summary">
+          <div class="summary-kicker">Your working estimate</div>
+          <h2 class="summary-title">TRIP<br>SUMMARY</h2>
+          <div class="summary-item"><span>Destination</span><strong>{{ destination || 'Not selected' }}</strong></div>
+          <div class="summary-item"><span>Travelers</span><strong>{{ travelers }} {{ travelers === 1 ? 'adult' : 'adults' }}</strong></div>
+          <div class="summary-item"><span>Base fare</span><strong>${{ base.toLocaleString() }}</strong></div>
+          <div class="summary-item"><span>Stay upgrade</span><strong>{{ roomExtra > 0 ? ('$' + roomExtra.toLocaleString()) : 'Included' }}</strong></div>
+          <div class="summary-item"><span>Estimated tax</span><strong>${{ tax.toLocaleString() }}</strong></div>
+          <div class="summary-total"><span>Total estimate</span><strong>${{ total.toLocaleString() }}</strong></div>
+          <p class="summary-note">Final pricing is confirmed with your itinerary.</p>
+        </aside>
       </div>
-
-      <div>Tax: ${{ tax }}</div>
-
-      <div><strong>Total: ${{ total }}</strong></div>
-
-    </div>
-
-  </div>
+    </section>
+  }
 </div>
 

@@ -1,11 +1,92 @@
 /* ===== ABOUT / CONTACT ===== */
+  :host {
+    display: block;
+    color: var(--blue);
+  }
+
+  .about-page {
+    overflow: hidden;
+  }
+
+  .about-page section { padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 64px); }
+
+  .container,
+  .about-grid,
+  .contact-grid {
+    width: min(1200px, 100%);
+    margin-inline: auto;
+  }
+
+  .about-intro {
+    padding-block: clamp(48px, 7vw, 76px) !important;
+    background: var(--off-white);
+    border-bottom: var(--border);
+  }
+
+  .section-tag {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--blue-bright);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    color: var(--blue);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 76px);
+    letter-spacing: 1px;
+    line-height: .92;
+  }
+
+  .about-grid { align-items: center; }
+  .about-heading { margin-bottom: 24px; font-size: clamp(40px, 5vw, 64px); }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: var(--border);
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary { background: var(--blue); color: var(--yellow); box-shadow: var(--shadow-yellow); }
+  .btn-outline { background: transparent; color: var(--blue); box-shadow: var(--shadow); }
+  .btn:hover { transform: translate(-2px, -2px); }
+  .btn:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: 3px; }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .section-alt { background: var(--off-white); border-block: var(--border); }
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0px auto;
     align-items: center;
+  
   }
 
   .about-img-frame {
@@ -22,20 +103,20 @@
     display: block;
   }
 
-  .about-content {}
-
-  .about-content p {
+.about-content p {
     font-size: 16px;
     line-height: 1.8;
     color: var(--gray);
     margin-bottom: 24px;
   }
+  
 
   .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 60px;
+    margin-bottom: 60px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -90,14 +171,13 @@
     margin: 0 auto;
   }
 
-  .contact-info {}
-
-  .contact-item {
+  .contact-info {
+    .contact-item {
     display: flex;
     gap: 16px;
     margin-bottom: 24px;
     align-items: flex-start;
-  }
+    }
 
   .contact-icon {
     width: 44px;
@@ -123,12 +203,54 @@
 
   .contact-detail span { font-size: 16px; font-weight: 600; }
 
+  }
+
   .contact-form-card {
     border: var(--border);
     background: var(--white);
     box-shadow: var(--shadow);
     padding: 32px;
   }
+
+  .contact-form-card .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-form-card .form-group label {
+    color: var(--gray);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .contact-form-card .form-group input,
+  .contact-form-card .form-group textarea {
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+
+  .contact-form-card .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid,
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-img-frame { height: min(460px, 75vw); }
+  }
+
+  @media (max-width: 600px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .contact-form-card { padding: 20px; }
+  }
+
+ 
 
   body.dark .contact-form-card { background: #1A1A1A; }
 

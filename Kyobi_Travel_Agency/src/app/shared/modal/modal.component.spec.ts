@@ -27,4 +27,23 @@ describe('ModalComponent', () => {
   });
 });
 
+  // ===== MODAL =====
+  function openModal(type: string) {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    const el = document.getElementById('modal-' + type);
+    if (el) {
+      el.classList.add('open');
+    }
+  }
+ 
+  function closeModal() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+ 
+  document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', function(e) {
+      if (e.target === m) closeModal();
+    });
+  });
+
 

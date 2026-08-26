@@ -1,5 +1,5 @@
 <!-- ===== HOME PAGE ===== -->
-<div id="page-home" class="page active">
+<div id="page-home" class="home-page">
 
   <!-- HERO -->
   <section class="hero">
@@ -29,7 +29,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-img-frame">
-          <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80" alt="Travel hero">
+          <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80" alt="Travel hero" fetchpriority="high" decoding="async">
         </div>
         <div class="hero-badge">
           <strong>FREE</strong>
@@ -65,28 +65,28 @@
 
   <!-- SEARCH WIDGET (inline on homepage) -->
   <div class="search-widget">
-    <div class="tab-bar">
-      <button class="tab active" onclick="switchTab(this,'tab-flights')">✈ Flights</button>
-      <button class="tab" onclick="switchTab(this,'tab-hotels')">🏨 Hotels</button>
-      <button class="tab" onclick="switchTab(this,'tab-packages-tab')">📦 Packages</button>
+    <div class="tab-bar" role="tablist" aria-label="Travel search type">
+      <button class="tab" [class.active]="activeTab === 'flights'" type="button" role="tab" [attr.aria-selected]="activeTab === 'flights'" aria-controls="tab-flights" (click)="selectTab('flights')">✈ Flights</button>
+      <button class="tab" [class.active]="activeTab === 'hotels'" type="button" role="tab" [attr.aria-selected]="activeTab === 'hotels'" aria-controls="tab-hotels" (click)="selectTab('hotels')">🏨 Hotels</button>
+      <button class="tab" [class.active]="activeTab === 'packages'" type="button" role="tab" [attr.aria-selected]="activeTab === 'packages'" aria-controls="tab-packages-tab" (click)="selectTab('packages')">📦 Packages</button>
     </div>
 
-    <div id="tab-flights" class="tab-content active">
+    <div id="tab-flights" class="tab-content" [class.active]="activeTab === 'flights'" role="tabpanel">
       <div class="form-row">
         <div class="form-group">
-          <label>From → To</label>
-          <input type="text" id="flightRoute" placeholder="e.g. Manila → Tokyo" value="">
+          <label for="flightRoute">From to</label>
+          <input type="text" id="flightRoute" placeholder="e.g. Manila to Tokyo" value="" autocomplete="off">
         </div>
         <div class="form-group">
-          <label>Departure</label>
+          <label for="flightDep">Departure</label>
           <input type="date" id="flightDep">
         </div>
         <div class="form-group">
-          <label>Return</label>
+          <label for="flightRet">Return</label>
           <input type="date" id="flightRet">
         </div>
         <div class="form-group">
-          <label>Travelers</label>
+          <label for="flightTrav">Travelers</label>
           <select id="flightTrav">
             <option>1 Adult</option>
             <option>2 Adults</option>
@@ -95,50 +95,50 @@
             <option>Group (5+)</option>
           </select>
         </div>
-        <button class="btn btn-primary" onclick="doSearch()">SEARCH</button>
+        <button class="btn btn-primary" type="button" (click)="searchTrips()">SEARCH</button>
       </div>
     </div>
 
-    <div id="tab-hotels" class="tab-content">
+    <div id="tab-hotels" class="tab-content" [class.active]="activeTab === 'hotels'" role="tabpanel">
       <div class="form-row">
         <div class="form-group">
-          <label>Destination</label>
-          <input type="text" placeholder="City or hotel name">
+          <label for="hotelDestination">Destination</label>
+          <input id="hotelDestination" type="text" placeholder="City or hotel name" autocomplete="off">
         </div>
         <div class="form-group">
-          <label>Check-in</label>
-          <input type="date">
+          <label for="hotelCheckIn">Check-in</label>
+          <input id="hotelCheckIn" type="date">
         </div>
         <div class="form-group">
-          <label>Check-out</label>
-          <input type="date">
+          <label for="hotelCheckOut">Check-out</label>
+          <input id="hotelCheckOut" type="date">
         </div>
         <div class="form-group">
-          <label>Guests & Rooms</label>
-          <select>
+          <label for="hotelGuests">Guests and rooms</label>
+          <select id="hotelGuests">
             <option>1 Guest, 1 Room</option>
             <option>2 Guests, 1 Room</option>
             <option>2 Guests, 2 Rooms</option>
             <option>Family (4+)</option>
           </select>
         </div>
-        <button class="btn btn-primary" onclick="doSearch()">SEARCH</button>
+        <button class="btn btn-primary" type="button" (click)="searchTrips()">SEARCH</button>
       </div>
     </div>
 
-    <div id="tab-packages-tab" class="tab-content">
+    <div id="tab-packages-tab" class="tab-content" [class.active]="activeTab === 'packages'" role="tabpanel">
       <div class="form-row">
         <div class="form-group">
-          <label>Destination</label>
-          <input type="text" placeholder="Where do you want to go?">
+          <label for="packageDestination">Destination</label>
+          <input id="packageDestination" type="text" placeholder="Where do you want to go?" autocomplete="off">
         </div>
         <div class="form-group">
-          <label>Travel Date</label>
-          <input type="date">
+          <label for="packageDate">Travel date</label>
+          <input id="packageDate" type="date">
         </div>
         <div class="form-group">
-          <label>Duration</label>
-          <select>
+          <label for="packageDuration">Duration</label>
+          <select id="packageDuration">
             <option>3–5 Days</option>
             <option>5–7 Days</option>
             <option>7–10 Days</option>
@@ -146,8 +146,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Travelers</label>
-          <select>
+          <label for="packageTravelers">Travelers</label>
+          <select id="packageTravelers">
             <option>Solo</option>
             <option>Couple</option>
             <option>Family</option>
@@ -167,7 +167,7 @@
           <span class="section-tag">Hand-picked for you</span>
           <h2 class="section-title">TRENDING<br>DESTINATIONS</h2>
         </div>
-        <button class="btn btn-outline" routerLink="/search">View All →</button>
+        <button class="btn btn-outline" type="button" routerLink="/search">View All →</button>
       </div>
       <div class="dest-grid">
         <!-- Card 1 -->
@@ -175,7 +175,7 @@
           <div class="dest-img">
             <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali">
             <div class="dest-badge">🔥 Hot</div>
-            <button class="wishlist-btn" onclick="toggleWishlist(this,'Bali')">🤍</button>
+            <button class="wishlist-btn" type="button" [class.saved]="wishlistedDestinations.has('Bali')" [attr.aria-pressed]="wishlistedDestinations.has('Bali')" aria-label="Save Bali" (click)="toggleWishlist('Bali')">{{ wishlistedDestinations.has('Bali') ? '♥' : '♡' }}</button>
           </div>
           <div class="dest-body">
             <div class="dest-location">🇮🇩 Indonesia</div>
@@ -185,7 +185,7 @@
               <div class="dest-price">$899 <small>/person</small></div>
               <div class="dest-rating"><span>★★★★★</span> 4.9</div>
             </div>
-            <button class="btn btn-primary" onclick="openBooking('Bali, Indonesia', 899)">Book Now →</button>
+            <button class="btn btn-primary" type="button" (click)="bookTrip('Bali, Indonesia', 899)">Book Now →</button>
           </div>
         </div>
         <!-- Card 2 -->
@@ -193,7 +193,7 @@
           <div class="dest-img">
             <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80" alt="Santorini">
             <div class="dest-badge">✨ Popular</div>
-            <button class="wishlist-btn" onclick="toggleWishlist(this,'Santorini')">🤍</button>
+            <button class="wishlist-btn" type="button" [class.saved]="wishlistedDestinations.has('Santorini')" [attr.aria-pressed]="wishlistedDestinations.has('Santorini')" aria-label="Save Santorini" (click)="toggleWishlist('Santorini')">{{ wishlistedDestinations.has('Santorini') ? '♥' : '♡' }}</button>
           </div>
           <div class="dest-body">
             <div class="dest-location">🇬🇷 Greece</div>
@@ -203,7 +203,7 @@
               <div class="dest-price">$1,299 <small>/person</small></div>
               <div class="dest-rating"><span>★★★★★</span> 4.8</div>
             </div>
-            <button class="btn btn-primary" onclick="openBooking('Santorini, Greece', 1299)">Book Now →</button>
+            <button class="btn btn-primary" type="button" (click)="bookTrip('Santorini, Greece', 1299)">Book Now →</button>
           </div>
         </div>
         <!-- Card 3 -->
@@ -211,7 +211,7 @@
           <div class="dest-img">
             <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Tokyo">
             <div class="dest-badge">🌸 New</div>
-            <button class="wishlist-btn" onclick="toggleWishlist(this,'Tokyo')">🤍</button>
+            <button class="wishlist-btn" type="button" [class.saved]="wishlistedDestinations.has('Tokyo')" [attr.aria-pressed]="wishlistedDestinations.has('Tokyo')" aria-label="Save Tokyo" (click)="toggleWishlist('Tokyo')">{{ wishlistedDestinations.has('Tokyo') ? '♥' : '♡' }}</button>
           </div>
           <div class="dest-body">
             <div class="dest-location">🇯🇵 Japan</div>
@@ -221,7 +221,7 @@
               <div class="dest-price">$1,099 <small>/person</small></div>
               <div class="dest-rating"><span>★★★★★</span> 4.9</div>
             </div>
-            <button class="btn btn-primary" onclick="openBooking('Tokyo, Japan', 1099)">Book Now →</button>
+            <button class="btn btn-primary" type="button" (click)="bookTrip('Tokyo, Japan', 1099)">Book Now →</button>
           </div>
         </div>
       </div>
@@ -229,14 +229,14 @@
   </section>
 
   <!-- PACKAGES PREVIEW -->
-  <section>
+  <section class="packages-section">
     <div class="container">
       <div class="section-header">
         <div>
           <span class="section-tag">Best Value</span>
           <h2 class="section-title">CURATED<br>PACKAGES</h2>
         </div>
-        <button class="btn btn-outline" routerLink="/packages">All Packages →</button>
+        <button class="btn btn-outline" type="button" routerLink="/packages">All Packages →</button>
       </div>
       <div class="packages-grid">
         <div class="pkg-card featured">
@@ -258,7 +258,7 @@
             </div>
             <div class="pkg-footer">
               <div class="pkg-price">$3,499 <small>/person</small></div>
-              <button class="btn btn-primary" onclick="openBooking('Maldives Overwater Bliss', 3499)">Book Package →</button>
+              <button class="btn btn-primary" type="button" (click)="bookTrip('Maldives Overwater Bliss', 3499)">Book Package →</button>
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@
             </div>
             <div class="pkg-footer">
               <div class="pkg-price">$1,899 <small>/person</small></div>
-              <button class="btn btn-yellow" onclick="openBooking('Paris Romance Weekend', 1899)">Book →</button>
+              <button class="btn btn-yellow" type="button" (click)="bookTrip('Paris Romance Weekend', 1899)">Book →</button>
             </div>
           </div>
         </div>
@@ -297,7 +297,7 @@
             </div>
             <div class="pkg-footer">
               <div class="pkg-price">$2,199 <small>/person</small></div>
-              <button class="btn btn-yellow" onclick="openBooking('Thailand Island Hopper', 2199)">Book →</button>
+              <button class="btn btn-yellow" type="button" (click)="bookTrip('Thailand Island Hopper', 2199)">Book →</button>
             </div>
           </div>
         </div>
@@ -311,11 +311,11 @@
       <div class="section-header">
         <div>
           <span class="section-tag">Plan Smarter</span>
-          <h2 class="section-title" style="color:var(--yellow)">BUDGET<br>PLANNER</h2>
+          <h2 class="section-title budget-title">BUDGET<br>PLANNER</h2>
         </div>
-        <button class="btn" style="background:var(--yellow);color:var(--blue);border:3px solid var(--yellow);box-shadow:5px 5px 0 rgba(255,255,255,0.2)" routerLink="/budget">Open Full Planner →</button>
+          <button class="btn btn-budget" type="button" routerLink="/budget">Open Full Planner →</button>
       </div>
-      <p style="color:#aaa;font-size:16px;max-width:500px;margin-bottom:40px;line-height:1.7">Track every dollar of your travel budget. Allocate funds across flights, hotels, food, and activities with our interactive budget tool.</p>
+        <p class="budget-copy">Track every dollar of your travel budget. Allocate funds across flights, hotels, food, and activities with our interactive budget tool.</p>
       <button class="btn btn-yellow" routerLink="/budget">🧮 Launch Budget Planner</button>
     </div>
   </section>
