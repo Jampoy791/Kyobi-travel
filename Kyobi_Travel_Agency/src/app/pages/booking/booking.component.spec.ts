@@ -25,4 +25,16 @@ describe('BookingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should reject blank and overlong destinations before confirming', () => {
+    component.destination = '   ';
+    component.confirmBooking();
+    expect(component.confirmed).toBeFalse();
+    expect(component.destinationError).toContain('where you want to go');
+
+    component.destination = 'A'.repeat(200);
+    component.confirmBooking();
+    expect(component.confirmed).toBeFalse();
+    expect(component.destinationError).toContain('80');
+  });
 });

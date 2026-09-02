@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
@@ -6,7 +6,8 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
   selector: 'app-navbar',
   imports: [RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
   isMenuOpen = false;

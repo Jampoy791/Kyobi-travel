@@ -36,11 +36,17 @@ export class SearchComponent {
   filtersApplied = false;
 
   get filteredResults(): SearchResult[] {
-    const minimumPrice = Number.isFinite(Number(this.priceMin)) ? Math.max(Number(this.priceMin), 0) : 0;
-    const maximumPrice = Number.isFinite(Number(this.priceMax)) ? Math.max(Number(this.priceMax), minimumPrice) : Number.MAX_SAFE_INTEGER;
+    const parsedMin = Number(this.priceMin);
+    const parsedMax = Number(this.priceMax);
+
+    const minimumPrice = Number.isFinite(parsedMin) ? Math.max(parsedMin, 0) : 0;
+    const maximumPrice = Number.isFinite(parsedMax) ? Math.max(parsedMax, 0) : Number.MAX_SAFE_INTEGER;
+    const normalizedMin = Math.min(minimumPrice, maximumPrice);
+    const normalizedMax = Math.max(minimumPrice, maximumPrice);
+
     const results = this.mockResults.filter(result =>
-      result.price >= minimumPrice &&
-      result.price <= maximumPrice &&
+      result.price >= normalizedMin &&
+      result.price <= normalizedMax &&
       result.stars >= this.selectedRating &&
       (this.selectedTypes.size === 0 || this.selectedTypes.has(result.type))
     );

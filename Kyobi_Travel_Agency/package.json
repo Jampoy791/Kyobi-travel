@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "node run-tests.js",
     "serve:ssr:Kyobi_Travel_Agency": "node dist/kyobi-travel-agency/server/server.mjs"
   },
   "private": true,

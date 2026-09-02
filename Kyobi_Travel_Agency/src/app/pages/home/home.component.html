@@ -29,7 +29,16 @@
       </div>
       <div class="hero-visual">
         <div class="hero-img-frame">
-          <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80" alt="Travel hero" fetchpriority="high" decoding="async">
+          <img
+            src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80"
+            srcset="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80 1200w"
+            sizes="(max-width: 900px) 100vw, 50vw"
+            alt="Travel hero"
+            width="1200"
+            height="900"
+            fetchpriority="high"
+            decoding="async"
+          >
         </div>
         <div class="hero-badge">
           <strong>FREE</strong>
@@ -173,7 +182,7 @@
         <!-- Card 1 -->
         <div class="dest-card">
           <div class="dest-img">
-            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali" width="800" height="600" loading="lazy" decoding="async">
             <div class="dest-badge">🔥 Hot</div>
             <button class="wishlist-btn" type="button" [class.saved]="wishlistedDestinations.has('Bali')" [attr.aria-pressed]="wishlistedDestinations.has('Bali')" aria-label="Save Bali" (click)="toggleWishlist('Bali')">{{ wishlistedDestinations.has('Bali') ? '♥' : '♡' }}</button>
           </div>
@@ -191,7 +200,7 @@
         <!-- Card 2 -->
         <div class="dest-card">
           <div class="dest-img">
-            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80" alt="Santorini">
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80" alt="Santorini" width="800" height="600" loading="lazy" decoding="async">
             <div class="dest-badge">✨ Popular</div>
             <button class="wishlist-btn" type="button" [class.saved]="wishlistedDestinations.has('Santorini')" [attr.aria-pressed]="wishlistedDestinations.has('Santorini')" aria-label="Save Santorini" (click)="toggleWishlist('Santorini')">{{ wishlistedDestinations.has('Santorini') ? '♥' : '♡' }}</button>
           </div>
@@ -209,7 +218,7 @@
         <!-- Card 3 -->
         <div class="dest-card">
           <div class="dest-img">
-            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Tokyo">
+            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Tokyo" width="800" height="600" loading="lazy" decoding="async">
             <div class="dest-badge">🌸 New</div>
             <button class="wishlist-btn" type="button" [class.saved]="wishlistedDestinations.has('Tokyo')" [attr.aria-pressed]="wishlistedDestinations.has('Tokyo')" aria-label="Save Tokyo" (click)="toggleWishlist('Tokyo')">{{ wishlistedDestinations.has('Tokyo') ? '♥' : '♡' }}</button>
           </div>
@@ -241,7 +250,7 @@
       <div class="packages-grid">
         <div class="pkg-card featured">
           <div class="pkg-img">
-            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80" alt="Maldives">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=80" alt="Maldives" width="1000" height="700" loading="lazy" decoding="async">
           </div>
           <div class="pkg-body">
             <div>
@@ -264,7 +273,7 @@
         </div>
         <div class="pkg-card">
           <div class="pkg-img">
-            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80" alt="Paris">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Paris" width="800" height="600" loading="lazy" decoding="async">
           </div>
           <div class="pkg-body">
             <span class="pkg-tag">🏙 City Break</span>
@@ -283,7 +292,7 @@
         </div>
         <div class="pkg-card">
           <div class="pkg-img">
-            <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=600&q=80" alt="Thailand">
+            <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?auto=format&fit=crop&w=800&q=80" alt="Thailand" width="800" height="600" loading="lazy" decoding="async">
           </div>
           <div class="pkg-body">
             <span class="pkg-tag">🌴 Adventure</span>

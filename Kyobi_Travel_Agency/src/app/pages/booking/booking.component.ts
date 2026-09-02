@@ -11,18 +11,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './booking.component.scss'
 })
 export class BookingComponent {
+  readonly maxDestinationLength = 80;
+
   constructor(private route: ActivatedRoute) {
     const queryParams = this.route.snapshot?.queryParams ?? {};
-    this.destination = queryParams['destination'] ?? '';
+    const incomingDestination = String(queryParams['destination'] ?? '').trim();
+    this.destination = incomingDestination.slice(0, this.maxDestinationLength);
     const queryPrice = Number(queryParams['price']);
     if (Number.isFinite(queryPrice) && queryPrice > 0) this.currentPrice = queryPrice;
   }
 
-
-  destination: string = '';
-  travelers: number = 2;
-  room: number = 0;
-  currentPrice: number = 1000; // example base price
+  destination = '';
+  destinationError = '';
+  travelers = 2;
+  room = 0;
+  currentPrice = 1000;
   submitted = false;
   confirmed = false;
 
@@ -42,10 +45,37 @@ export class BookingComponent {
     return this.base + this.roomExtra + this.tax;
   }
 
+  updateDestination(value: string): void {
+    this.destination = value.trimStart().slice(0, this.maxDestinationLength);
+    this.destinationError = '';
+  }
+
+  private validateDestination(): boolean {
+    const normalized = this.destination.trim();
+
+    if (!normalized) {
+      this.destinationError = 'Tell us where you want to go.';
+      return false;
+    }
+
+    if (normalized.length > this.maxDestinationLength) {
+      this.destinationError = `Keep the destination under ${this.maxDestinationLength} characters.`;
+      return false;
+    }
+
+    this.destinationError = '';
+    this.destination = normalized;
+    return true;
+  }
+
   confirmBooking(): void {
     this.submitted = true;
-    if (this.destination.trim()) {
-      this.confirmed = true;
+
+    if (!this.validateDestination()) {
+      this.confirmed = false;
+      return;
     }
+
+    this.confirmed = true;
   }
 }

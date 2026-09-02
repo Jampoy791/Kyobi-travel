@@ -25,4 +25,14 @@ describe('SearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should normalize inverted price ranges instead of returning no results', () => {
+    component.priceMin = 2500;
+    component.priceMax = 800;
+
+    const filtered = component.filteredResults;
+
+    expect(filtered.length).toBeGreaterThan(0);
+    expect(filtered.every((result) => result.price >= 800 && result.price <= 2500)).toBeTrue();
+  });
 });
