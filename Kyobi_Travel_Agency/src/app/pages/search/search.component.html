@@ -71,7 +71,7 @@
               <div class="result-price-side">
                 <div class="result-rating"><span class="stars">{{ '★'.repeat(result.stars) }}{{ '☆'.repeat(5 - result.stars) }}</span>{{ result.stars }}.0 / 5</div>
                 <div class="result-price">${{ result.price.toLocaleString() }}<small>/person</small></div>
-                <a class="btn btn-primary result-action" routerLink="/booking">Book trip</a>
+                <a class="btn btn-primary result-action" routerLink="/booking" [queryParams]="{ destination: result.name, price: result.price }">Book this trip</a>
               </div>
             </article>
           } @empty {
