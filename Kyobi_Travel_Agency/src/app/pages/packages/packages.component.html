@@ -1,17 +1,17 @@
 <div id="page-packages" class="packages-page">
   <section class="packages-intro">
     <div class="packages-shell">
-      <span class="section-tag">Best value bundles</span>
+      <span class="section-tag">Ready-to-book itineraries</span>
       <h1 class="section-title">TRAVEL<br>PACKAGES</h1>
-      <p>Thoughtful itineraries with the important pieces already in place, leaving you more room to be present.</p>
+      <p>Flights, stays, and experiences bundled into one clear plan, so you can spend less time coordinating and more time exploring.</p>
     </div>
   </section>
 
   <section class="packages-content">
     <div class="packages-shell">
       <div class="packages-heading">
-        <span>{{ packages.length }} journeys</span>
-        <span>Ready when you are</span>
+        <span>{{ packages.length }} ready-to-book packages</span>
+        <span>Compare what is included</span>
       </div>
       <div class="packages-grid">
         @for (travelPackage of packages; track travelPackage.name; let index = $index) {
@@ -31,7 +31,7 @@
               </div>
               <div class="pkg-footer">
                 <div class="pkg-price">${{ travelPackage.price.toLocaleString() }} <small>/person</small></div>
-                <button class="btn" [class.btn-primary]="index === 0" [class.btn-yellow]="index !== 0" type="button" (click)="bookPackage(travelPackage.name, travelPackage.price)">{{ index === 0 ? 'Book package' : 'Book trip' }} <span>→</span></button>
+                <button class="btn" [class.btn-primary]="index === 0" [class.btn-yellow]="index !== 0" type="button" (click)="bookPackage(travelPackage.name, travelPackage.price)">Book this package <span>→</span></button>
               </div>
             </div>
           </article>

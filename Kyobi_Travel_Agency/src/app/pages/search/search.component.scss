@@ -91,11 +91,13 @@
 
 .price-inputs input:focus,
 .sort-control select:focus { border-color: var(--blue-bright); }
+.price-inputs input:focus-visible,
+.sort-control select:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: 2px; }
 .price-inputs span { color: var(--gray); font-size: 12px; font-weight: 700; }
 
 .star-filter { display: flex; flex-wrap: wrap; gap: 6px; }
 .star-btn {
-  min-height: 38px;
+  min-height: 44px;
   padding: 6px 10px;
   border: 2px solid #d6d2cb;
   background: transparent;
@@ -112,7 +114,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 34px;
+  min-height: 44px;
   color: var(--blue);
   cursor: pointer;
   font-size: 14px;
@@ -179,7 +181,7 @@
 .stars { display: block; margin-bottom: 4px; color: var(--yellow-dark); font-size: 16px; letter-spacing: 1px; }
 .result-price { color: var(--blue); font-family: 'Bebas Neue', sans-serif; font-size: 34px; line-height: 1; text-align: right; }
 .result-price small { display: block; color: var(--gray); font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600; }
-.result-action { width: 100%; min-height: 40px; padding-inline: 8px; font-size: 10px; }
+.result-action { width: 100%; min-height: 44px; padding-inline: 8px; font-size: 10px; }
 
 .empty-results { padding: 48px 28px; background: var(--off-white); border: var(--border); }
 .empty-results h2 { margin: 0 0 10px; font-family: 'Bebas Neue', sans-serif; font-size: 42px; }

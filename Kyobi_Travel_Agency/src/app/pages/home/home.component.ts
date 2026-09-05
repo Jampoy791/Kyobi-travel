@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 export class HomeComponent {
   activeTab: 'flights' | 'hotels' | 'packages' = 'flights';
   wishlistedDestinations = new Set<string>();
+  readonly marqueeItems = ['FLIGHTS', 'HOTELS', 'PACKAGES', 'BALI', 'PARIS', 'TOKYO', 'SANTORINI', 'MALDIVES', 'ADVENTURES AWAIT'];
 
   constructor(private router: Router) {}
 

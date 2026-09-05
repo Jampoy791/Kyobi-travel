@@ -33,7 +33,7 @@
             src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80"
             srcset="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80 1200w"
             sizes="(max-width: 900px) 100vw, 50vw"
-            alt="Travel hero"
+            alt="Aerial view of a turquoise coastline and rugged mountain landscape"
             width="1200"
             height="900"
             fetchpriority="high"
@@ -51,39 +51,27 @@
   <!-- MARQUEE -->
   <div class="marquee-bar">
     <div class="marquee-track">
-      <span class="marquee-item">FLIGHTS</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">HOTELS</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">PACKAGES</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">BALI</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">PARIS</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">TOKYO</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">SANTORINI</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">MALDIVES</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">ADVENTURES AWAIT</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">FLIGHTS</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">HOTELS</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">PACKAGES</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">BALI</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">PARIS</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">TOKYO</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">SANTORINI</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">MALDIVES</span><span class="marquee-dot">◆</span>
-      <span class="marquee-item">ADVENTURES AWAIT</span><span class="marquee-dot">◆</span>
+      @for (item of marqueeItems; track item) {
+        <span class="marquee-item">{{ item }}</span><span class="marquee-dot">◆</span>
+      }
+      @for (item of marqueeItems; track item) {
+        <span class="marquee-item">{{ item }}</span><span class="marquee-dot">◆</span>
+      }
     </div>
   </div>
 
   <!-- SEARCH WIDGET (inline on homepage) -->
   <div class="search-widget">
     <div class="tab-bar" role="tablist" aria-label="Travel search type">
-      <button class="tab" [class.active]="activeTab === 'flights'" type="button" role="tab" [attr.aria-selected]="activeTab === 'flights'" aria-controls="tab-flights" (click)="selectTab('flights')">✈ Flights</button>
-      <button class="tab" [class.active]="activeTab === 'hotels'" type="button" role="tab" [attr.aria-selected]="activeTab === 'hotels'" aria-controls="tab-hotels" (click)="selectTab('hotels')">🏨 Hotels</button>
-      <button class="tab" [class.active]="activeTab === 'packages'" type="button" role="tab" [attr.aria-selected]="activeTab === 'packages'" aria-controls="tab-packages-tab" (click)="selectTab('packages')">📦 Packages</button>
+      <button id="tab-flight-trigger" class="tab" [class.active]="activeTab === 'flights'" type="button" role="tab" [attr.aria-selected]="activeTab === 'flights'" aria-controls="tab-flights" (click)="selectTab('flights')">✈ Flights</button>
+      <button id="tab-hotel-trigger" class="tab" [class.active]="activeTab === 'hotels'" type="button" role="tab" [attr.aria-selected]="activeTab === 'hotels'" aria-controls="tab-hotels" (click)="selectTab('hotels')">🏨 Hotels</button>
+      <button id="tab-package-trigger" class="tab" [class.active]="activeTab === 'packages'" type="button" role="tab" [attr.aria-selected]="activeTab === 'packages'" aria-controls="tab-packages" (click)="selectTab('packages')">📦 Packages</button>
     </div>
 
-    <div id="tab-flights" class="tab-content" [class.active]="activeTab === 'flights'" role="tabpanel">
+    <div id="tab-flights" class="tab-content" [class.active]="activeTab === 'flights'" [hidden]="activeTab !== 'flights'" role="tabpanel" aria-labelledby="tab-flight-trigger">
       <div class="form-row">
         <div class="form-group">
-          <label for="flightRoute">From to</label>
+          <label for="flightRoute">Route</label>
           <input type="text" id="flightRoute" placeholder="e.g. Manila to Tokyo" value="" autocomplete="off">
         </div>
         <div class="form-group">
@@ -108,7 +96,7 @@
       </div>
     </div>
 
-    <div id="tab-hotels" class="tab-content" [class.active]="activeTab === 'hotels'" role="tabpanel">
+    <div id="tab-hotels" class="tab-content" [class.active]="activeTab === 'hotels'" [hidden]="activeTab !== 'hotels'" role="tabpanel" aria-labelledby="tab-hotel-trigger">
       <div class="form-row">
         <div class="form-group">
           <label for="hotelDestination">Destination</label>
@@ -135,7 +123,7 @@
       </div>
     </div>
 
-    <div id="tab-packages-tab" class="tab-content" [class.active]="activeTab === 'packages'" role="tabpanel">
+    <div id="tab-packages" class="tab-content" [class.active]="activeTab === 'packages'" [hidden]="activeTab !== 'packages'" role="tabpanel" aria-labelledby="tab-package-trigger">
       <div class="form-row">
         <div class="form-group">
           <label for="packageDestination">Destination</label>
@@ -248,7 +236,7 @@
         <button class="btn btn-outline" type="button" routerLink="/packages">All Packages →</button>
       </div>
       <div class="packages-grid">
-        <div class="pkg-card featured">
+        <div class="pkg-card">
           <div class="pkg-img">
             <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=80" alt="Maldives" width="1000" height="700" loading="lazy" decoding="async">
           </div>
@@ -267,7 +255,7 @@
             </div>
             <div class="pkg-footer">
               <div class="pkg-price">$3,499 <small>/person</small></div>
-              <button class="btn btn-primary" type="button" (click)="bookTrip('Maldives Overwater Bliss', 3499)">Book Package →</button>
+              <button class="btn btn-primary" type="button" (click)="bookTrip('Maldives Overwater Bliss', 3499)">Book this package →</button>
             </div>
           </div>
         </div>
@@ -286,7 +274,7 @@
             </div>
             <div class="pkg-footer">
               <div class="pkg-price">$1,899 <small>/person</small></div>
-              <button class="btn btn-yellow" type="button" (click)="bookTrip('Paris Romance Weekend', 1899)">Book →</button>
+              <button class="btn btn-yellow" type="button" (click)="bookTrip('Paris Romance Weekend', 1899)">Book this package →</button>
             </div>
           </div>
         </div>
@@ -306,7 +294,7 @@
             </div>
             <div class="pkg-footer">
               <div class="pkg-price">$2,199 <small>/person</small></div>
-              <button class="btn btn-yellow" type="button" (click)="bookTrip('Thailand Island Hopper', 2199)">Book →</button>
+              <button class="btn btn-yellow" type="button" (click)="bookTrip('Thailand Island Hopper', 2199)">Book this package →</button>
             </div>
           </div>
         </div>
