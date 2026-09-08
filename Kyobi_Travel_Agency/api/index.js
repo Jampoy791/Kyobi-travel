@@ -2,18 +2,24 @@ import path from 'path';
 
 export default async function handler(req, res) {
   try {
-    // Resolve the exact absolute path inside the Vercel container lambda
-    const serverPath = path.join(process.cwd(), 'dist/kyobi-travel-agency/server/server.mjs');
+    // Dynamically reference the exact runtime path inside Vercel's isolated container
+    const serverDistPath = path.join(process.cwd(), 'dist/kyobi-travel-agency/server/server.mjs');
     
-    // Dynamically import the Angular SSR server engine
-    const server = await import(serverPath);
+    // Import the main compiled angular bundle
+    const module = await import(serverDistPath);
     
-    // Safely extract the active server request handler fallback
-    const requestHandler = server.reqHandler || server.default || server.app();
+    // Fall back through Angular 19's server module exports
+    const serverApp = module.reqHandler || module.default || module.app;
     
-    return requestHandler(req, res);
+    const appHandler = typeof serverApp === 'function' ? serverApp() : serverApp;
+    
+    return appHandler(req, res);
   } catch (error) {
-    console.error('Angular SSR Serverless Wrapper Error:', error);
-    return res.status(500).send('Internal Server Error: Execution Failed');
+    console.error('Angular SSR Runtime Error Trace:', error);
+    return res.status(500).json({
+      error: 'Angular SSR Runtime Failure',
+      message: error.message,
+      stack: error.stack
+    });
   }
 }
