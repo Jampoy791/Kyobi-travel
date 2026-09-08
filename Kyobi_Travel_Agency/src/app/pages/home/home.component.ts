@@ -33,4 +33,13 @@ export class HomeComponent {
     this.router.navigate(['/booking'], { queryParams: { destination, price } });
   }
 
+  scrollCarousel(carousel: HTMLElement, direction: -1 | 1): void {
+    const card = carousel.querySelector<HTMLElement>('.dest-card, .pkg-card');
+    const gap = Number.parseFloat(getComputedStyle(carousel).getPropertyValue('--carousel-gap')) || 36;
+
+    if (card) {
+      carousel.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: 'smooth' });
+    }
+  }
+
 }

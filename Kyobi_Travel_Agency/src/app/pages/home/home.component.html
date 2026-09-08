@@ -166,9 +166,15 @@
         </div>
         <button class="btn btn-outline" type="button" routerLink="/search">View All →</button>
       </div>
-      <div class="dest-grid">
+      <div class="carousel-controls" aria-label="Trending destinations controls">
+        <button class="carousel-control" type="button" aria-label="Previous destination" (click)="scrollCarousel(destinationsCarousel, -1)">&larr;</button>
+        <button class="carousel-control" type="button" aria-label="Next destination" (click)="scrollCarousel(destinationsCarousel, 1)">&rarr;</button>
+      </div>
+      <div #destinationsCarousel class="carousel-window" role="region" aria-roledescription="carousel" aria-label="Trending destinations carousel" tabindex="0">
+      <div class="dest-grid carousel-track">
+        @for (copy of [0]; track copy) {
         <!-- Card 1 -->
-        <div class="dest-card">
+        <div class="dest-card" [attr.aria-hidden]="copy === 1 ? 'true' : null" [attr.inert]="copy === 1 ? '' : null">
           <div class="dest-img">
             <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali" width="800" height="600" loading="lazy" decoding="async">
             <div class="dest-badge">🔥 Hot</div>
@@ -186,7 +192,7 @@
           </div>
         </div>
         <!-- Card 2 -->
-        <div class="dest-card">
+        <div class="dest-card" [attr.aria-hidden]="copy === 1 ? 'true' : null" [attr.inert]="copy === 1 ? '' : null">
           <div class="dest-img">
             <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80" alt="Santorini" width="800" height="600" loading="lazy" decoding="async">
             <div class="dest-badge">✨ Popular</div>
@@ -204,7 +210,7 @@
           </div>
         </div>
         <!-- Card 3 -->
-        <div class="dest-card">
+        <div class="dest-card" [attr.aria-hidden]="copy === 1 ? 'true' : null" [attr.inert]="copy === 1 ? '' : null">
           <div class="dest-img">
             <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Tokyo" width="800" height="600" loading="lazy" decoding="async">
             <div class="dest-badge">🌸 New</div>
@@ -221,6 +227,8 @@
             <button class="btn btn-primary" type="button" (click)="bookTrip('Tokyo, Japan', 1099)">Book Now →</button>
           </div>
         </div>
+        }
+      </div>
       </div>
     </div>
   </section>
@@ -235,8 +243,14 @@
         </div>
         <button class="btn btn-outline" type="button" routerLink="/packages">All Packages →</button>
       </div>
-      <div class="packages-grid">
-        <div class="pkg-card">
+      <div class="carousel-controls" aria-label="Curated packages controls">
+        <button class="carousel-control" type="button" aria-label="Previous package" (click)="scrollCarousel(packagesCarousel, -1)">&larr;</button>
+        <button class="carousel-control" type="button" aria-label="Next package" (click)="scrollCarousel(packagesCarousel, 1)">&rarr;</button>
+      </div>
+      <div #packagesCarousel class="carousel-window" role="region" aria-roledescription="carousel" aria-label="Curated packages carousel" tabindex="0">
+      <div class="packages-grid carousel-track">
+        @for (copy of [0]; track copy) {
+        <div class="pkg-card" [attr.aria-hidden]="copy === 1 ? 'true' : null" [attr.inert]="copy === 1 ? '' : null">
           <div class="pkg-img">
             <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=80" alt="Maldives" width="1000" height="700" loading="lazy" decoding="async">
           </div>
@@ -259,7 +273,7 @@
             </div>
           </div>
         </div>
-        <div class="pkg-card">
+        <div class="pkg-card" [attr.aria-hidden]="copy === 1 ? 'true' : null" [attr.inert]="copy === 1 ? '' : null">
           <div class="pkg-img">
             <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Paris" width="800" height="600" loading="lazy" decoding="async">
           </div>
@@ -278,7 +292,7 @@
             </div>
           </div>
         </div>
-        <div class="pkg-card">
+        <div class="pkg-card" [attr.aria-hidden]="copy === 1 ? 'true' : null" [attr.inert]="copy === 1 ? '' : null">
           <div class="pkg-img">
             <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?auto=format&fit=crop&w=800&q=80" alt="Thailand" width="800" height="600" loading="lazy" decoding="async">
           </div>
@@ -298,6 +312,8 @@
             </div>
           </div>
         </div>
+        }
+      </div>
       </div>
     </div>
   </section>
