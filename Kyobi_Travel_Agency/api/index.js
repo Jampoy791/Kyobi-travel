@@ -1,16 +1,15 @@
-import path from 'path';
+import { URL } from 'url';
 
 export default async function handler(req, res) {
   try {
-    // Dynamically reference the exact runtime path inside Vercel's isolated container
-    const serverDistPath = path.join(process.cwd(), 'dist/kyobi-travel-agency/server/server.mjs');
+    // Resolve relative path cleanly regardless of root system casing variations
+    const serverDistUrl = new URL('../dist/kyobi-travel-agency/server/server.mjs', import.meta.url).href;
     
-    // Import the main compiled angular bundle
-    const module = await import(serverDistPath);
+    // Import the main compiled angular server bundle
+    const module = await import(serverDistUrl);
     
     // Fall back through Angular 19's server module exports
     const serverApp = module.reqHandler || module.default || module.app;
-    
     const appHandler = typeof serverApp === 'function' ? serverApp() : serverApp;
     
     return appHandler(req, res);
