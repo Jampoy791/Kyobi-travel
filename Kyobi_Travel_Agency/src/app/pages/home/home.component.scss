@@ -18,11 +18,8 @@
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.14em;
-      text-decoration: none;
       text-transform: uppercase;
       transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
-      position: relative;
-      overflow: hidden;
     }
 
     .btn-primary {
@@ -99,7 +96,6 @@
     color: var(--blue);
     letter-spacing: 0.03em;
     margin-bottom: 24px;
-    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -157,8 +153,6 @@
     border: var(--border);
     box-shadow: 10px 10px 0px var(--yellow);
     overflow: hidden;
-    background: var(--blue-mid);
-    border-radius: 0;
   }
 
   .hero-img-frame img {
@@ -218,22 +212,20 @@
     box-shadow: 10px 10px 0px var(--blue);
     padding: 32px;
     margin: 40px auto;
+    width: calc(100% - 80px);
     max-width: 1400px;
-    margin-left: 40px;
-    margin-right: 40px;
     position: relative;
     z-index: 10;
   }
 
   @media (min-width: 900px) {
     .search-widget {
-      margin: -20px 40px 60px;
+      margin: -20px auto 60px;
     }
   }
 
   .tab-bar {
     display: flex;
-    gap: 0;
     margin-bottom: 28px;
     border-bottom: var(--border);
   }
@@ -252,7 +244,6 @@
     color: var(--gray);
     transition: all 0.15s;
     margin-bottom: -3px;
-    min-height: 44px;
   }
 
   .tab.active {
@@ -349,23 +340,67 @@
 
   .section-alt { background: var(--off-white); border-top: var(--border); border-bottom: var(--border); }
 
-  .dest-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(260px, 1fr));
-    gap: 24px;
+  .carousel-window {
     max-width: 1400px;
-    align-items: start;
+    margin: 0 auto;
+    overflow-x: auto;
+    container-type: inline-size;
+    --carousel-image-height: 260px;
+    --carousel-gap: 36px;
+    padding: 4px 0 12px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .carousel-window::-webkit-scrollbar { display: none; }
+
+  .carousel-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    max-width: 1400px;
+    margin: 0 auto 16px;
+  }
+
+  .carousel-control {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: var(--border);
+    background: var(--white);
+    color: var(--blue);
+    box-shadow: 3px 3px 0 var(--blue);
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+  }
+
+  .carousel-control:hover { background: var(--yellow); transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--blue); }
+  .carousel-control:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: 3px; }
+
+  .carousel-track {
+    display: flex;
+    gap: var(--carousel-gap);
+    width: max-content;
+  }
+
+  .dest-grid,
+  .packages-grid {
+    --carousel-card-width: calc((100cqw - var(--carousel-gap)) / 2);
   }
 
   .dest-card {
     border: var(--border);
     background: var(--white);
     box-shadow: var(--shadow);
-    overflow: hidden;
     transition: transform 0.15s, box-shadow 0.15s;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
+    flex: 0 0 var(--carousel-card-width);
+    scroll-snap-align: start;
   }
 
   .dest-card:hover {
@@ -373,14 +408,10 @@
     box-shadow: 9px 9px 0px var(--blue);
   }
 
-  .dest-card:nth-child(2) { transform: translateY(18px); }
-  .dest-card:nth-child(2):hover { transform: translate(-4px, 14px); }
-
   .dest-img {
-    height: 280px;
-    overflow: hidden;
-    background: var(--blue-mid);
+    height: var(--carousel-image-height);
     position: relative;
+    overflow: hidden;
   }
 
   .dest-img img {
@@ -411,7 +442,6 @@
 
   .dest-body .btn,
   .pkg-footer .btn {
-    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     margin-top: 16px;
     width: 100%;
@@ -476,14 +506,6 @@
 
   .dest-rating span { color: var(--yellow-dark); }
 
-  .packages-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(260px, 1fr));
-    gap: 24px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
   .packages-section {
     padding-block: 56px;
   }
@@ -491,12 +513,12 @@
   .pkg-card {
     border: var(--border);
     box-shadow: var(--shadow);
-    overflow: hidden;
     background: var(--white);
     transition: transform 0.15s, box-shadow 0.15s;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
+    flex: 0 0 var(--carousel-card-width);
+    scroll-snap-align: start;
   }
 
   .pkg-card:hover {
@@ -505,10 +527,8 @@
   }
 
   .pkg-img {
-    height: 260px;
+    height: var(--carousel-image-height);
     overflow: hidden;
-    background: var(--blue-mid);
-    position: relative;
   }
 
   .pkg-img img {
@@ -521,7 +541,13 @@
 
   .pkg-card:hover .pkg-img img { transform: scale(1.05); }
 
-  .pkg-body { padding: 22px 24px; display: flex; flex-direction: column; justify-content: space-between; }
+  .pkg-body {
+    padding: 22px 24px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
   .pkg-footer .btn {
     padding: 12px 22px;
@@ -681,7 +707,10 @@
     }
 
     .hero-visual { height: 420px; }
-    .search-widget { margin-inline: 28px; }
+    .search-widget {
+      width: calc(100% - 56px);
+      margin-inline: auto;
+    }
     section { padding-inline: 28px; }
 
     .form-row {
@@ -731,8 +760,8 @@
     .section-header { align-items: flex-start; margin-bottom: 30px; }
     .section-header > .btn { width: 100%; }
     .section-title { font-size: clamp(40px, 13vw, 60px); }
-    .dest-grid, .packages-grid { grid-template-columns: 1fr; gap: 20px; }
-    .dest-card:nth-child(2), .dest-card:nth-child(2):hover { transform: none; }
+    .dest-grid,
+    .packages-grid { --carousel-card-width: 100cqw; }
     .dest-img { height: min(72vw, 320px); }
     .packages-section { padding-block: 44px; }
     .pkg-body { padding: 22px; }
@@ -743,4 +772,5 @@
 
   @media (prefers-reduced-motion: reduce) {
     .marquee-track { animation: none; }
+    .carousel-window { scroll-behavior: auto; }
   }
