@@ -2,12 +2,12 @@
 
 A modern travel agency web application concept designed to help users find travel deals while effortlessly managing their trip finances through an integrated smart budget tracker system.
 
-🚀 Live Demo 
+##🚀 Live Demo 
 👉 https://vercel.com/titoo-jaypeee/kyobi-travel
 
 ---
 
-✨ Features
+##✨ Features
 
 - **Deal Discovery:** Explore curated travel packages and destinations.
 - **Integrated Budget Tracker:** Dynamic expense logging system to help users plan trips within their financial limits.
@@ -15,14 +15,14 @@ A modern travel agency web application concept designed to help users find trave
 
 ---
 
-🛠️ Tech Stack
+##🛠️ Tech Stack
 
 - Front-end: Angular, TypeScript HTML5, SCSS / CSS3
 - Architecture: BEM methodology for scalable styling, Component-based UI layout
 
 ---
 
-📦 Installation & Setup
+##📦 Installation & Setup
 
 Follow these simple steps to run this project locally on your machine.
 
