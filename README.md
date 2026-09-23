@@ -22,7 +22,7 @@ A modern travel agency web application concept designed to help users find trave
 
 ---
 
-## 📦 Installation & Setup
+📦 Installation & Setup
 
 Follow these simple steps to run this project locally on your machine.
 
@@ -33,7 +33,7 @@ Follow these simple steps to run this project locally on your machine.
 
 2. Navigate into the project directory:
    ```bash
-   cd Kyobi-travel
+   cd Kyobi-travel/Kyobi-Travel-Agency
    ```
 
 3. Launch the project:
