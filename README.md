@@ -3,7 +3,7 @@
 A modern travel agency web application concept designed to help users find travel deals while effortlessly managing their trip finances through an integrated smart budget tracker system.
 
 ## 🚀 Live Demo 
-👉 https://vercel.com/titoo-jaypeee/kyobi-travel
+👉 https://kyobi-travel.vercel.app/
 
 ---
 
